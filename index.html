@@ -6,10 +6,10 @@
     <title>Document</title>
     <style>
         body{
-            background-color: gray;
+            background-color: black;
         }
         canvas{
-            background-color: white;
+            background-color: gray;
         }
     </style>
 </head>
@@ -20,30 +20,38 @@
 
         const ctx = myCanvas.getContext("2d");
 
-        ctx.fillStyle = "#c6da1a"
-        ctx.fillRect(20,20,100,100);
+        ctx.strokeStyle = "#c6da1a";
+        ctx.strokeRect(90,90,100,100);
         
-        ctx.fillStyle = "#075a61"
-        ctx.fillRect(180,180,100,100);
+        ctx.fillRect(160,160,100,100);
 
-        ctx.fillStyle = "#1e0761"
-        ctx.fillRect(100,100,100,100);
+        ctx.fillStyle  = "#1cc6b1";
+        ctx.fillRect(240,240,100,100)
 
-        ctx.strokeStyle = ("#223e62");
-        ctx.strokeRect(260,260,100,100)
-
-        ctx.strokeStyle = ("#074014");
-        ctx.lineWidth = 5;
-        ctx.strokeRect(340,340,100,100)
+        ctx.strokeStyle = "#38c61c";
+        ctx.strokeRect(310,310,100,100);
 
         ctx.beginPath();
-        ctx.strokeStyle = ("#7e0b0b");
-        ctx.lineWidth = 3;
-        ctx.moveTo(300,250);
-        ctx.lineTo(330,400);
-        ctx.lineTo(360,100);
-        ctx.lineTo(300,250);
+        ctx.strokeStyle = ("#38c61c");
+        ctx.moveTo(380,240);
+        ctx.lineTo(480,240);
+        ctx.lineTo(430,180);
+        ctx.lineTo(380,240);
+        ctx.fillStyle  = "#1cc6b1";
+        ctx.fill();
         ctx.stroke();
+
+        ctx.beginPath();
+        ctx.strokeStyle = ("#000000");
+        ctx.arc(150, 400, 50, 0, 2 * Math.PI);
+        ctx.fillStyle  = "#e3b135";
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(200, 400, 50, 0, 2 * Math.PI);
+        ctx.stroke();
+
     </script>
 </body>
 </html>
