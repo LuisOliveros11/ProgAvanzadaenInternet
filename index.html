@@ -75,6 +75,14 @@
         grd.addColorStop(1, "#165b13");
         ctx.fillStyle = grd;
         ctx.fillRect(20, 220, 150, 100);
+
+
+        const grd2 = ctx.createRadialGradient(480, 420, 20, 580, 470, 150);
+        grd2.addColorStop(0, "#15135b");
+        grd2.addColorStop(0.5, "#8e6a1d");
+        grd2.addColorStop(1, "#5b3d3d");
+        ctx.fillStyle = grd2;
+        ctx.fillRect(430, 370, 150, 100);
     </script>
 </body>
 </html>
