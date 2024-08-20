@@ -63,6 +63,12 @@
 
         ctx.font = "25px Arial";
         ctx.fillText("Hola Mundo", 248, 50);
+
+        img1 = new Image(); 
+        img1.src = "gato.png";
+        img1.onload = function() {
+            ctx.drawImage(img1,430,30);
+        };
     </script>
 </body>
 </html>
