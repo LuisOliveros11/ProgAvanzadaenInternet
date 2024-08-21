@@ -87,6 +87,8 @@
         */
        
         var color;
+        var figura = 1; 
+
         function getRandomColor() {
             var trans = '0.5'; // 50% transparency
             color = 'rgba(';
@@ -99,15 +101,29 @@
 
         document.getElementById("myCanvas").addEventListener("mouseover",function(e){
             getRandomColor();
+            console.log(color);
+        });
+
+        document.getElementById("myCanvas").addEventListener("mouseout",function(e){
+            if(figura == 1){
+                figura = 2;
+            }else{
+                figura = 1;
+            }
         });
 
         document.getElementById("myCanvas").addEventListener("mousedown",function(e){
-            ctx.beginPath();
             ctx.strokeStyle = ("#000000");
-            ctx.arc(e.x, e.y, 50, 0, 2 * Math.PI);
-            ctx.fillStyle  = color;
-            ctx.fill();
-            ctx.stroke();
+            if(figura == 1){
+                ctx.beginPath();
+                ctx.arc(e.x, e.y, 50, 0, 2 * Math.PI);
+                ctx.fillStyle  = color;
+                ctx.fill();
+                ctx.stroke();
+            }else if(figura == 2){
+                ctx.fillStyle  = color;
+                ctx.fillRect((e.x - 50), (e.y - 50),100,100);
+            }
         });        
     </script>
 </body>
