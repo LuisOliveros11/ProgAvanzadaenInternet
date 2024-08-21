@@ -20,6 +20,7 @@
 
         const ctx = myCanvas.getContext("2d");
 
+        /*
         ctx.strokeStyle = "#c6da1a";
         ctx.strokeRect(90,90,100,100);
         
@@ -83,6 +84,16 @@
         grd2.addColorStop(1, "#5b3d3d");
         ctx.fillStyle = grd2;
         ctx.fillRect(430, 370, 150, 100);
+        */
+
+        document.getElementById("myCanvas").addEventListener("mousedown",function(e){
+            ctx.beginPath();
+            ctx.strokeStyle = ("#000000");
+            ctx.arc(e.x, e.y, 50, 0, 2 * Math.PI);
+            ctx.fillStyle  = "rgba(255,87,51,0.4)";
+            ctx.fill();
+            ctx.stroke();
+        });
     </script>
 </body>
 </html>
