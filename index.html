@@ -85,15 +85,30 @@
         ctx.fillStyle = grd2;
         ctx.fillRect(430, 370, 150, 100);
         */
+       
+        var color;
+        function getRandomColor() {
+            var trans = '0.5'; // 50% transparency
+            color = 'rgba(';
+            for (var i = 0; i < 3; i++) {
+                color += Math.floor(Math.random() * 255) + ',';
+            }
+            color += trans + ')'; // add the transparency
+            return color;
+        }   
+
+        document.getElementById("myCanvas").addEventListener("mouseover",function(e){
+            getRandomColor();
+        });
 
         document.getElementById("myCanvas").addEventListener("mousedown",function(e){
             ctx.beginPath();
             ctx.strokeStyle = ("#000000");
             ctx.arc(e.x, e.y, 50, 0, 2 * Math.PI);
-            ctx.fillStyle  = "rgba(255,87,51,0.4)";
+            ctx.fillStyle  = color;
             ctx.fill();
             ctx.stroke();
-        });
+        });        
     </script>
 </body>
 </html>
