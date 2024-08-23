@@ -19,70 +19,14 @@
         const myCanvas = document.getElementById("myCanvas");
 
         const ctx = myCanvas.getContext("2d");
-
-        ctx.strokeStyle = "#c6da1a";
-        ctx.strokeRect(90,90,100,100);
         
-        ctx.fillRect(160,160,100,100);
-
-        ctx.fillStyle  = "#1cc6b1";
-        ctx.fillRect(240,240,100,100)
-
-        ctx.strokeStyle = "#38c61c";
-        ctx.strokeRect(310,310,100,100);
-
-        ctx.beginPath();
-        ctx.strokeStyle = ("#38c61c");
-        ctx.moveTo(380,240);
-        ctx.lineTo(480,240);
-        ctx.lineTo(430,180);
-        ctx.lineTo(380,240);
-        ctx.fillStyle  = "#1cc6b1";
-        ctx.fill();
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.strokeStyle = ("#000000");
-        ctx.arc(150, 400, 50, 0, 2 * Math.PI);
-        ctx.fillStyle  = "#e3b135";
-        ctx.fill();
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.arc(200, 400, 50, 0, 2 * Math.PI);
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.arc(150, 410, 30, 0, 1 * Math.PI);
-        ctx.fillStyle  = "#6f0606";
-        ctx.fill();
-        ctx.stroke();
-
-        ctx.font = "25px Arial";
-        ctx.strokeText("Hola Mundo", 250, 50);
-
-        ctx.font = "25px Arial";
-        ctx.fillText("Hola Mundo", 248, 50);
-
-        img1 = new Image(); 
-        img1.src = "gato.png";
-        img1.onload = function() {
-            ctx.drawImage(img1,430,30);
-        };
-
-        const grd = ctx.createLinearGradient(20, 220, 170, 320);
-        grd.addColorStop(0, "#55074f");
-        grd.addColorStop(1, "#165b13");
-        ctx.fillStyle = grd;
-        ctx.fillRect(20, 220, 150, 100);
-
-
-        const grd2 = ctx.createRadialGradient(480, 420, 20, 580, 470, 150);
-        grd2.addColorStop(0, "#15135b");
-        grd2.addColorStop(0.5, "#8e6a1d");
-        grd2.addColorStop(1, "#5b3d3d");
-        ctx.fillStyle = grd2;
-        ctx.fillRect(430, 370, 150, 100);
+        document.getElementById("myCanvas").addEventListener("mousemove",function(e){
+            ctx.beginPath();
+                ctx.arc(e.x, e.y, 5, 0, 2 * Math.PI);
+                ctx.fillStyle  = "#000000";
+                ctx.fill();
+                ctx.stroke();
+        });
     </script>
 </body>
 </html>
