@@ -19,7 +19,6 @@
         const myCanvas = document.getElementById("myCanvas");
 
         const ctx = myCanvas.getContext("2d");
-        
         document.getElementById("myCanvas").addEventListener("mousemove",function(e){
             ctx.beginPath();
                 ctx.arc(e.x, e.y, 5, 0, 2 * Math.PI);
