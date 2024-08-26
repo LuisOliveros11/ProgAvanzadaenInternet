@@ -20,9 +20,8 @@
 
         const ctx = myCanvas.getContext("2d");
        
-        var color;
-        var figura = 1; 
-        var pintar = 1;
+        var coordenada_X = 200;
+        var coordenada_Y = 200;
 
         function getRandomColor() {
             var trans = '0.5'; // 50% transparency
@@ -34,46 +33,35 @@
             return color;
         }   
 
-        document.getElementById("myCanvas").addEventListener("mouseover",function(e){
-            getRandomColor();
+        ctx.fillStyle  = 'black';
+        ctx.fillRect(coordenada_X,coordenada_Y,20,20);
+
+        function pintar(ctx){
+            ctx.fillStyle  = 'gray';
+            ctx.fillRect(0,0,600,500);
+
+            ctx.fillStyle  = 'black';
+            ctx.fillRect(coordenada_X,coordenada_Y,20,20);
+        };
+
+        document.addEventListener('keypress', function(e){
+            switch(e.keyCode){
+                case 119:
+                    coordenada_Y -= 10;
+                break;
+                case 115:
+                    coordenada_Y += 10;
+                break;
+                case 97:
+                    coordenada_X -= 10;
+                break;
+                case 100:
+                    coordenada_X += 10;
+                break;
+            }
+
+            pintar(ctx);
         });
-
-        document.getElementById("myCanvas").addEventListener("mouseout",function(e){
-            if(figura == 1){
-                figura = 2;
-            }else{
-                figura = 1;
-            }
-        });
-
-        document.getElementById("myCanvas").addEventListener("mouseup",function(e){
-            pintar = 1;
-        });  
-
-        document.getElementById("myCanvas").addEventListener("mousedown",function(e){
-            pintar = 0;
-            ctx.strokeStyle = ("#000000");
-            if(figura == 1){
-                ctx.beginPath();
-                ctx.arc(e.x, e.y, 50, 0, 2 * Math.PI);
-                ctx.fillStyle  = color;
-                ctx.fill();
-                ctx.stroke();
-            }else if(figura == 2){
-                ctx.fillStyle  = color;
-                ctx.fillRect((e.x - 50), (e.y - 50),100,100);
-            }
-        });  
-
-        document.getElementById("myCanvas").addEventListener("mousemove",function(e){
-            if(pintar == 0){
-                ctx.beginPath();
-                ctx.arc(e.x, e.y, 5, 0, 2 * Math.PI);
-                ctx.fillStyle  = "#000000";
-                ctx.fill();
-                ctx.stroke();
-            }
-        });  
 
     </script>
 </body>
