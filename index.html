@@ -19,13 +19,62 @@
         const myCanvas = document.getElementById("myCanvas");
 
         const ctx = myCanvas.getContext("2d");
+       
+        var color;
+        var figura = 1; 
+        var pintar = 1;
+
+        function getRandomColor() {
+            var trans = '0.5'; // 50% transparency
+            color = 'rgba(';
+            for (var i = 0; i < 3; i++) {
+                color += Math.floor(Math.random() * 255) + ',';
+            }
+            color += trans + ')'; // add the transparency
+            return color;
+        }   
+
+        document.getElementById("myCanvas").addEventListener("mouseover",function(e){
+            getRandomColor();
+        });
+
+        document.getElementById("myCanvas").addEventListener("mouseout",function(e){
+            if(figura == 1){
+                figura = 2;
+            }else{
+                figura = 1;
+            }
+        });
+
+        document.getElementById("myCanvas").addEventListener("mouseup",function(e){
+            pintar = 1;
+        });  
+
+        document.getElementById("myCanvas").addEventListener("mousedown",function(e){
+            pintar = 0;
+            ctx.strokeStyle = ("#000000");
+            if(figura == 1){
+                ctx.beginPath();
+                ctx.arc(e.x, e.y, 50, 0, 2 * Math.PI);
+                ctx.fillStyle  = color;
+                ctx.fill();
+                ctx.stroke();
+            }else if(figura == 2){
+                ctx.fillStyle  = color;
+                ctx.fillRect((e.x - 50), (e.y - 50),100,100);
+            }
+        });  
+
         document.getElementById("myCanvas").addEventListener("mousemove",function(e){
-            ctx.beginPath();
+            if(pintar == 0){
+                ctx.beginPath();
                 ctx.arc(e.x, e.y, 5, 0, 2 * Math.PI);
                 ctx.fillStyle  = "#000000";
                 ctx.fill();
                 ctx.stroke();
-        });
+            }
+        });  
+
     </script>
 </body>
 </html>
