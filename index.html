@@ -47,16 +47,32 @@
         document.addEventListener('keypress', function(e){
             switch(e.keyCode){
                 case 119:
-                    coordenada_Y -= 10;
+                    if(coordenada_Y < -20){
+                        coordenada_Y = 500;
+                    }else{
+                        coordenada_Y -= 10;
+                    }
                 break;
                 case 115:
-                    coordenada_Y += 10;
+                    if(coordenada_Y > 520){
+                        coordenada_Y = 0
+                    }else{
+                        coordenada_Y += 10;
+                    }
                 break;
                 case 97:
-                    coordenada_X -= 10;
+                    if(coordenada_X < -20){
+                        coordenada_X = 600;
+                    }else{
+                        coordenada_X -= 10;
+                    }
                 break;
                 case 100:
-                    coordenada_X += 10;
+                    if(coordenada_X > 620){
+                        coordenada_X = 0;
+                    }else{
+                        coordenada_X += 10;
+                    }
                 break;
             }
 
