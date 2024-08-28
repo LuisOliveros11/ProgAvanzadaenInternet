@@ -22,6 +22,7 @@
        
         var coordenada_X = 200;
         var coordenada_Y = 200;
+        var direccion = '';
 
         function getRandomColor() {
             var trans = '0.5'; // 50% transparency
@@ -36,48 +37,77 @@
         ctx.fillStyle  = 'black';
         ctx.fillRect(coordenada_X,coordenada_Y,20,20);
 
-        function pintar(ctx){
+        document.addEventListener('keypress', function(e){
+            switch(e.keyCode){
+                case 119:
+                    direccion = 'up';
+                break;
+                case 115:
+                    direccion = 'down';
+                break;
+                case 97:
+                    direccion = 'left';
+                break;
+                case 100:
+                    direccion = 'right';
+                break;
+            }
+        });
+
+        function update(){
+            switch(direccion){
+                case 'up':
+                if(coordenada_Y < -20){
+                    coordenada_Y = 500;
+                }else{
+                    coordenada_Y -= 5;
+                }
+                break;
+                case 'down':
+                if(coordenada_Y > 520){
+                    coordenada_Y = 0
+                }else{
+                    coordenada_Y += 5;
+                }
+                break;
+                case 'left':
+                if(coordenada_X < -20){
+                    coordenada_X = 600;
+                }else{
+                    coordenada_X -= 5;
+                }
+                break;
+                case 'right':
+                if(coordenada_X > 620){
+                    coordenada_X = 0;
+                }else{
+                    coordenada_X += 5;
+                }
+                break;
+            }
+        }
+
+
+        function pintar(){
             ctx.fillStyle  = 'gray';
             ctx.fillRect(0,0,600,500);
 
             ctx.fillStyle  = 'black';
             ctx.fillRect(coordenada_X,coordenada_Y,20,20);
+
+            update();
+            requestAnimationFrame(pintar);
         };
+        requestAnimationFrame(pintar);
 
-        document.addEventListener('keypress', function(e){
-            switch(e.keyCode){
-                case 119:
-                    if(coordenada_Y < -20){
-                        coordenada_Y = 500;
-                    }else{
-                        coordenada_Y -= 10;
-                    }
-                break;
-                case 115:
-                    if(coordenada_Y > 520){
-                        coordenada_Y = 0
-                    }else{
-                        coordenada_Y += 10;
-                    }
-                break;
-                case 97:
-                    if(coordenada_X < -20){
-                        coordenada_X = 600;
-                    }else{
-                        coordenada_X -= 10;
-                    }
-                break;
-                case 100:
-                    if(coordenada_X > 620){
-                        coordenada_X = 0;
-                    }else{
-                        coordenada_X += 10;
-                    }
-                break;
-            }
-
-            pintar(ctx);
-        });
+        window.requestAnimationFrame = (function () {
+        return window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        function (callback) {
+            window.setTimeout(callback, 17);
+        };
+}());
 
     </script>
 </body>
