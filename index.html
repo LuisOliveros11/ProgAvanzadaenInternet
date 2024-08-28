@@ -9,7 +9,7 @@
             background-color: black;
         }
         canvas{
-            background-color: gray;
+            background-color: white;
         }
     </style>
 </head>
@@ -19,102 +19,106 @@
         const myCanvas = document.getElementById("myCanvas");
 
         const ctx = myCanvas.getContext("2d");
-       
-        var coordenada_X = 200;
-        var coordenada_Y = 200;
-        var direccion = '';
-        var velocidad = 5;
 
-        function getRandomColor() {
-            var trans = '0.5'; // 50% transparency
-            color = 'rgba(';
-            for (var i = 0; i < 3; i++) {
-                color += Math.floor(Math.random() * 255) + ',';
-            }
-            color += trans + ')'; // add the transparency
-            return color;
-        }   
+        ctx.strokeStyle = ("#000000");
+        ctx.beginPath();
+        ctx.arc(250, 150, 50, 0, 2 * Math.PI);
+        ctx.fillStyle  = "#ca9a87";
+        ctx.fill();
+        ctx.stroke();
 
-        ctx.fillStyle  = 'black';
-        ctx.fillRect(coordenada_X,coordenada_Y,20,20);
+        ctx.strokeStyle = ("#000000");
+        ctx.beginPath();
+        ctx.arc(230, 140, 10, 0, 2 * Math.PI);
+        ctx.fillStyle  = "white";
+        ctx.fill();
+        ctx.stroke();
+        
+        ctx.strokeStyle = ("#000000");
+        ctx.beginPath();
+        ctx.arc(270, 140, 10, 0, 2 * Math.PI);
+        ctx.fillStyle  = "white";
+        ctx.fill();
+        ctx.stroke();
 
-        document.addEventListener('keypress', function(e){
-            switch(e.keyCode){
-                case 119:
-                    direccion = 'up';
-                break;
-                case 115:
-                    direccion = 'down';
-                break;
-                case 97:
-                    direccion = 'left';
-                break;
-                case 100:
-                    direccion = 'right';
-                break;
-                case 32:
-                    velocidad += 3;
-                break;
-            }
-        });
 
-        function update(){
-            switch(direccion){
-                case 'up':
-                if(coordenada_Y < -20){
-                    coordenada_Y = 500;
-                }else{
-                    coordenada_Y -= velocidad;
-                }
-                break;
-                case 'down':
-                if(coordenada_Y > 520){
-                    coordenada_Y = 0
-                }else{
-                    coordenada_Y += velocidad;
-                }
-                break;
-                case 'left':
-                if(coordenada_X < -20){
-                    coordenada_X = 600;
-                }else{
-                    coordenada_X -= velocidad;
-                }
-                break;
-                case 'right':
-                if(coordenada_X > 620){
-                    coordenada_X = 0;
-                }else{
-                    coordenada_X += velocidad;
-                }
-                break;
-            }
-        }
+        ctx.strokeStyle = ("#000000");
+        ctx.beginPath();
+        ctx.arc(190, 310, 15, 0, 2 * Math.PI);
+        ctx.fillStyle  = "#ca9a87";
+        ctx.fill();
+        ctx.stroke();
 
-        function pintar(){
-            ctx.fillStyle  = 'gray';
-            ctx.fillRect(0,0,600,500);
+        ctx.strokeStyle = ("#000000");
+        ctx.beginPath();
+        ctx.arc(310, 310, 15, 0, 2 * Math.PI);
+        ctx.fillStyle  = "#ca9a87";
+        ctx.fill();
+        ctx.stroke();
 
-            ctx.fillStyle  = 'white';
-            ctx.font = "30px Arial";
-            ctx.fillText("Velocidad="+velocidad, 400, 50);   
+        ctx.beginPath();
+        ctx.lineWidth = 5;
+        ctx.moveTo(235,180);
+        ctx.lineTo(265,180);
+        ctx.stroke();
 
-            ctx.fillStyle  = 'black';
-            ctx.fillRect(coordenada_X,coordenada_Y,20,20);
+        ctx.beginPath();
+        ctx.lineWidth = 3;
+        ctx.moveTo(225,105);
+        ctx.lineTo(195,150);
+        ctx.lineTo(212,110);
+        ctx.lineTo(210,120);
+        ctx.lineTo(185,150);
+        ctx.lineTo(225,80);
+        ctx.lineTo(225,90);
+        ctx.lineTo(300,100);
+        ctx.lineTo(300,140);
+        ctx.lineTo(220,100);
+        ctx.fillStyle  = "black";
+        ctx.fill();
+        ctx.stroke();
 
-            update();
-            requestAnimationFrame(pintar);
-        };
-        requestAnimationFrame(pintar);
+        ctx.beginPath();
+        ctx.strokeStyle = ("black");
+        ctx.lineWidth = 3;
+        ctx.moveTo(220,190);
+        ctx.lineTo(180,300);
+        ctx.lineTo(200,320);
+        ctx.lineTo(230,220);
+        ctx.fillStyle  = "black";
+        ctx.fill();
+        ctx.stroke();
 
-        window.requestAnimationFrame = (function () {
-        return window.requestAnimationFrame ||
-        window.webkitRequestAnimationFrame ||
-        window.mozRequestAnimationFrame ||
-        function (callback) {
-            window.setTimeout(callback, 17);
-        };
-}());
+        
+
+        ctx.moveTo(280,190);
+        ctx.lineTo(320,300);
+        ctx.lineTo(300,320);
+        ctx.lineTo(270,220);
+        ctx.fillStyle  = "black";
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.moveTo(215,270);
+        ctx.lineTo(215,310);
+        ctx.lineTo(285,310);
+        ctx.lineTo(285,270);
+        ctx.stroke();
+
+        ctx.moveTo(215,310);
+        ctx.lineTo(215,410);
+        ctx.lineTo(235,410);
+        ctx.lineTo(250,330);
+        ctx.lineTo(265,410);
+        ctx.lineTo(285,410);
+        ctx.lineTo(285,310);
+        ctx.fillStyle  = "black";
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillRect(185, 410,50,20);
+        ctx.fillRect(264, 410,50,20);
+
 
     </script>
 </body>
