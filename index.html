@@ -23,6 +23,7 @@
         var coordenada_X = 200;
         var coordenada_Y = 200;
         var direccion = '';
+        var velocidad = 5;
 
         function getRandomColor() {
             var trans = '0.5'; // 50% transparency
@@ -51,6 +52,9 @@
                 case 100:
                     direccion = 'right';
                 break;
+                case 32:
+                    velocidad += 3;
+                break;
             }
         });
 
@@ -60,37 +64,40 @@
                 if(coordenada_Y < -20){
                     coordenada_Y = 500;
                 }else{
-                    coordenada_Y -= 5;
+                    coordenada_Y -= velocidad;
                 }
                 break;
                 case 'down':
                 if(coordenada_Y > 520){
                     coordenada_Y = 0
                 }else{
-                    coordenada_Y += 5;
+                    coordenada_Y += velocidad;
                 }
                 break;
                 case 'left':
                 if(coordenada_X < -20){
                     coordenada_X = 600;
                 }else{
-                    coordenada_X -= 5;
+                    coordenada_X -= velocidad;
                 }
                 break;
                 case 'right':
                 if(coordenada_X > 620){
                     coordenada_X = 0;
                 }else{
-                    coordenada_X += 5;
+                    coordenada_X += velocidad;
                 }
                 break;
             }
         }
 
-
         function pintar(){
             ctx.fillStyle  = 'gray';
             ctx.fillRect(0,0,600,500);
+
+            ctx.fillStyle  = 'white';
+            ctx.font = "30px Arial";
+            ctx.fillText("Velocidad="+velocidad, 400, 50);   
 
             ctx.fillStyle  = 'black';
             ctx.fillRect(coordenada_X,coordenada_Y,20,20);
