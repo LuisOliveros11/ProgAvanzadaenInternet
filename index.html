@@ -9,7 +9,7 @@
             background-color: black;
         }
         canvas{
-            background-color: white;
+            background-color: rgb(49, 217, 255);
         }
     </style>
 </head>
@@ -20,104 +20,84 @@
 
         const ctx = myCanvas.getContext("2d");
 
-        ctx.strokeStyle = ("#000000");
-        ctx.beginPath();
-        ctx.arc(250, 150, 50, 0, 2 * Math.PI);
-        ctx.fillStyle  = "#ca9a87";
-        ctx.fill();
-        ctx.stroke();
+        ctx.fillStyle  = "#6a3f2a";
+        ctx.fillRect(0, 190,600,140);
 
-        ctx.strokeStyle = ("#000000");
+        ctx.fillStyle  = "green";
+        ctx.fillRect(0, 330,600,250);
+
+        ctx.fillStyle  = "red";
+        ctx.fillRect(185, 300,200,200);
+
+        ctx.fillStyle  = "#d8eaee";
+        ctx.fillRect(210, 330,30,30);
+        ctx.fillRect(330, 330,30,30);
+
+
+        ctx.fillStyle  = "black";
+        ctx.fillRect(235, 410,50,90);
+
         ctx.beginPath();
-        ctx.arc(230, 140, 10, 0, 2 * Math.PI);
+        ctx.arc(270, 460, 5, 0, 2 * Math.PI);
         ctx.fillStyle  = "white";
         ctx.fill();
         ctx.stroke();
-        
-        ctx.strokeStyle = ("#000000");
-        ctx.beginPath();
-        ctx.arc(270, 140, 10, 0, 2 * Math.PI);
-        ctx.fillStyle  = "white";
-        ctx.fill();
-        ctx.stroke();
 
-
-        ctx.strokeStyle = ("#000000");
         ctx.beginPath();
-        ctx.arc(190, 310, 15, 0, 2 * Math.PI);
-        ctx.fillStyle  = "#ca9a87";
-        ctx.fill();
-        ctx.stroke();
-
-        ctx.strokeStyle = ("#000000");
-        ctx.beginPath();
-        ctx.arc(310, 310, 15, 0, 2 * Math.PI);
-        ctx.fillStyle  = "#ca9a87";
+        ctx.moveTo(0,200);
+        ctx.lineTo(100,150);
+        ctx.lineTo(160,200);
+        ctx.lineTo(220,130);
+        ctx.lineTo(300,200);
+        ctx.lineTo(350,80);
+        ctx.lineTo(450,200);
+        ctx.lineTo(500,150);
+        ctx.lineTo(600,190);
+        ctx.fillStyle  = "#6a3f2a";
         ctx.fill();
         ctx.stroke();
 
         ctx.beginPath();
-        ctx.lineWidth = 5;
-        ctx.moveTo(235,180);
-        ctx.lineTo(265,180);
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.lineWidth = 3;
-        ctx.moveTo(225,105);
-        ctx.lineTo(195,150);
-        ctx.lineTo(212,110);
-        ctx.lineTo(210,120);
-        ctx.lineTo(185,150);
-        ctx.lineTo(225,80);
-        ctx.lineTo(225,90);
-        ctx.lineTo(300,100);
-        ctx.lineTo(300,140);
-        ctx.lineTo(220,100);
-        ctx.fillStyle  = "black";
+        ctx.moveTo(60,170);
+        ctx.lineTo(120,170);
+        ctx.lineTo(100,155);
+        ctx.lineTo(60,170);
+        ctx.fillStyle  = "#ffffff";
         ctx.fill();
         ctx.stroke();
 
         ctx.beginPath();
-        ctx.strokeStyle = ("black");
-        ctx.lineWidth = 3;
-        ctx.moveTo(220,190);
-        ctx.lineTo(180,300);
-        ctx.lineTo(200,320);
-        ctx.lineTo(230,220);
-        ctx.fillStyle  = "black";
+        ctx.moveTo(202,150);
+        ctx.lineTo(240,150);
+        ctx.lineTo(220,130);
+        ctx.lineTo(202,150);
+        ctx.fillStyle  = "#ffffff";
         ctx.fill();
         ctx.stroke();
 
-        
-
-        ctx.moveTo(280,190);
-        ctx.lineTo(320,300);
-        ctx.lineTo(300,320);
-        ctx.lineTo(270,220);
-        ctx.fillStyle  = "black";
+        ctx.beginPath();
+        ctx.moveTo(340,100);
+        ctx.lineTo(368,100);
+        ctx.lineTo(350,80);
+        ctx.lineTo(340,100);
+        ctx.fillStyle  = "#ffffff";
         ctx.fill();
         ctx.stroke();
 
-        ctx.moveTo(215,270);
-        ctx.lineTo(215,310);
-        ctx.lineTo(285,310);
-        ctx.lineTo(285,270);
-        ctx.stroke();
-
-        ctx.moveTo(215,310);
-        ctx.lineTo(215,410);
-        ctx.lineTo(235,410);
-        ctx.lineTo(250,330);
-        ctx.lineTo(265,410);
-        ctx.lineTo(285,410);
-        ctx.lineTo(285,310);
-        ctx.fillStyle  = "black";
+        ctx.beginPath();
+        ctx.moveTo(480,170);
+        ctx.lineTo(550,170);
+        ctx.lineTo(500,150);
+        ctx.lineTo(480,170);
+        ctx.fillStyle  = "#ffffff";
         ctx.fill();
         ctx.stroke();
 
-        ctx.fillRect(185, 410,50,20);
-        ctx.fillRect(264, 410,50,20);
+        ctx.beginPath();
+        ctx.arc(500, 100, 50, 0, 2 * Math.PI);
+        ctx.fillStyle  = "yellow";
+        ctx.fill();
+        ctx.stroke();
 
 
     </script>
