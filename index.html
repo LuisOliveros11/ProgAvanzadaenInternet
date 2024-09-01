@@ -9,7 +9,7 @@
             background-color: black;
         }
         canvas{
-            background-color: rgb(49, 217, 255);
+            background-color: rgb(11, 28, 124);
         }
     </style>
 </head>
@@ -20,156 +20,103 @@
 
         const ctx = myCanvas.getContext("2d");
 
-        ctx.fillStyle  = "#ffbcec";
-        ctx.fillRect(0, 420,600,80);
+        ctx.fillStyle  = "#097100";
+        ctx.fillRect(0, 360,600,20);
 
-        ctx.fillStyle  = "black";
-        ctx.fillRect(197.5, 177.5,55,55);
+        ctx.fillStyle  = "#0ead00";
+        ctx.fillRect(0, 340,600,20);
 
-        ctx.fillStyle  = "#ad8358";
-        ctx.fillRect(200, 180,50,50);
-
-        ctx.fillStyle  = "black";
-        ctx.fillRect(107.5, 297.5,55,55);
-
-        ctx.fillStyle  = "#ad8358";
-        ctx.fillRect(110, 300,50,50);
-
-        ctx.fillStyle  = "black";
-        ctx.fillRect(467.5, 197.5,55,55);
-
-        ctx.fillStyle  = "#ad8358";
-        ctx.fillRect(470, 200,50,50);
-
-        ctx.fillStyle  = "#34a42e";
-        ctx.fillRect(520, 320,70,100);
-
-        ctx.fillStyle  = "#34a42e";
-        ctx.strokeStyle = "black";
-        ctx.fillRect(500, 300,110,30);
-
-        ctx.fillStyle  = "#2e32a4";
-        ctx.fillRect(250, 240,100,180);
-
-        ctx.fillStyle  = "#a42e92";
-        ctx.fillRect(300, 300,100,120);
-
-        ctx.fillStyle  = "black";
-        ctx.fillRect(290, 320,10,100);
+        ctx.fillStyle  = "#15ff00";
+        ctx.fillRect(0, 320,600,20);
 
         ctx.beginPath();
-        ctx.arc(310, 320, 5, 0, 2 * Math.PI);
-        ctx.fillStyle  = "white";
+        ctx.arc(480, 260, 20, 0, 2 * Math.PI);
+        ctx.fillStyle  = "#f3ff00";
         ctx.fill();
         ctx.stroke();
 
         ctx.beginPath();
-        ctx.arc(390, 320, 5, 0, 2 * Math.PI);
-        ctx.fillStyle  = "white";
+        ctx.arc(480, 260, 17, 0, 2 * Math.PI);
+        ctx.fillStyle  = ("#0b1c7c");
         ctx.fill();
         ctx.stroke();
 
         ctx.beginPath();
-        ctx.arc(310, 400, 5, 0, 2 * Math.PI);
-        ctx.fillStyle  = "white";
+        ctx.arc(200, 260, 20, 0, 2 * Math.PI);
+        ctx.fillStyle  = "#f3ff00";
         ctx.fill();
         ctx.stroke();
 
         ctx.beginPath();
-        ctx.arc(390, 400, 5, 0, 2 * Math.PI);
-        ctx.fillStyle  = "white";
+        ctx.arc(200, 260, 17, 0, 2 * Math.PI);
+        ctx.fillStyle  = ("#0b1c7c");
         ctx.fill();
         ctx.stroke();
 
         ctx.beginPath();
-        ctx.arc(270, 260, 5, 0, 2 * Math.PI);
-        ctx.fillStyle  = "white";
+        ctx.arc(110, 260, 20, 0, 2 * Math.PI);
+        ctx.fillStyle  = "#f3ff00";
         ctx.fill();
         ctx.stroke();
 
         ctx.beginPath();
-        ctx.arc(330, 260, 5, 0, 2 * Math.PI);
-        ctx.fillStyle  = "white";
+        ctx.arc(110, 260, 17, 0, 2 * Math.PI);
+        ctx.fillStyle  = ("#0b1c7c");
         ctx.fill();
         ctx.stroke();
 
+        ctx.fillStyle ="#7c580b";
+        ctx.fillRect(290,140,10,180);
+
         ctx.beginPath();
-        ctx.arc(270, 400, 5, 0, 2 * Math.PI);
-        ctx.fillStyle  = "white";
+        ctx.moveTo(300,150);
+        ctx.lineTo(240,200);
+        ctx.lineTo(270,130);
+        ctx.lineTo(220,130);
+        ctx.lineTo(250,110);
+        ctx.lineTo(210,90);
+        ctx.lineTo(270,110);
+        ctx.lineTo(260,50);
+        ctx.lineTo(300,100);
+        ctx.lineTo(290,80);
+        ctx.lineTo(330,110);
+        ctx.lineTo(335,80);
+        ctx.lineTo(340,130);
+        ctx.lineTo(350,180);
+        ctx.lineTo(300,150);
+        ctx.fillStyle ="#2cc21d";
         ctx.fill();
         ctx.stroke();
 
-        ctx.beginPath();
-        ctx.arc(205, 190, 3, 0, 2 * Math.PI);
-        ctx.fillStyle  = "black";
-        ctx.fill();
-        ctx.stroke();
+        for (let x = 0; x < 600; x+=80) {
+            ctx.fillStyle  = "#664a0c";
+            ctx.fillRect(x, 460,40,40);
+        }
 
-        ctx.beginPath();
-        ctx.arc(245, 190, 3, 0, 2 * Math.PI);
-        ctx.fillStyle  = "black";
-        ctx.fill();
-        ctx.stroke();
+        for (let x = 40; x < 600; x+=80) {
+            ctx.fillStyle  = "#664a0c";
+            ctx.fillRect(x, 420,40,40);
+        }
 
-        ctx.beginPath();
-        ctx.arc(205, 220, 3, 0, 2 * Math.PI);
-        ctx.fillStyle  = "black";
-        ctx.fill();
-        ctx.stroke();
+        for (let x = 0; x < 600; x+=80) {
+            ctx.fillStyle  = "#664a0c";
+            ctx.fillRect(x, 380,40,40);
+        }
 
-        ctx.beginPath();
-        ctx.arc(245, 220, 3, 0, 2 * Math.PI);
-        ctx.fillStyle  = "black";
-        ctx.fill();
-        ctx.stroke();
+        for (let x = 40; x < 600; x+=80) {
+            ctx.fillStyle  = "#c28000";
+            ctx.fillRect(x, 460,40,40);
+        }
 
-        ctx.beginPath();
-        ctx.arc(120, 310, 3, 0, 2 * Math.PI);
-        ctx.fillStyle  = "black";
-        ctx.fill();
-        ctx.stroke();
+        for (let x = 0; x < 600; x+=80) {
+            ctx.fillStyle  = "#c28000";
+            ctx.fillRect(x, 420,40,40);
+        }
 
-        ctx.beginPath();
-        ctx.arc(150, 310, 3, 0, 2 * Math.PI);
-        ctx.fillStyle  = "black";
-        ctx.fill();
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.arc(120, 340, 3, 0, 2 * Math.PI);
-        ctx.fillStyle  = "black";
-        ctx.fill();
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.arc(150, 340, 3, 0, 2 * Math.PI);
-        ctx.fillStyle  = "black";
-        ctx.fill();
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.arc(510, 210, 3, 0, 2 * Math.PI);
-        ctx.fillStyle  = "black";
-        ctx.fill();
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.arc(480, 210, 3, 0, 2 * Math.PI);
-        ctx.fillStyle  = "black";
-        ctx.fill();
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.arc(510, 240, 3, 0, 2 * Math.PI);
-        ctx.fillStyle  = "black";
-        ctx.fill();
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.arc(480, 240, 3, 0, 2 * Math.PI);
-        ctx.fillStyle  = "black";
-        ctx.fill();
-        ctx.stroke();
+        for (let x = 40; x < 600; x+=80) {
+            ctx.fillStyle  = "#c28000";
+            ctx.fillRect(x, 380,40,40);
+        }
 
     </script>
 </body>
