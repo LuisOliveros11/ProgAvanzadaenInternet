@@ -31,10 +31,10 @@
             }
 
             Colision(objetivo){
-                if(this.x < objetivo.x + objetivo.ancho && 
-                   this.x + this.ancho > objetivo.x &&
-                   this.y < objetivo.y + objetivo.ancho &&
-                   this.y + this.ancho > objetivo.ancho){ 
+                if(this.x < objetivo.x + objetivo.ancho &&  
+                   this.x + this.ancho > objetivo.x &&  
+                   this.y < objetivo.y + objetivo.alto &&   
+                   this.y + this.alto > objetivo.y){ 
                     return true;    
                 }
                 return false;
@@ -43,6 +43,7 @@
 
         var jugador = new Rectangulo("Red", 200, 200, 30, 30, 5);
         var target = new Rectangulo("Yellow", 100, 100, 10, 10, null);
+        var pared = new Rectangulo("Black",110,300,20,300,null);
         var direccion = '';
 
         function getRandomColor() {
@@ -122,12 +123,48 @@
             ctx.fillStyle  = target.color;
             ctx.fillRect(target.x,target.y,target.ancho,target.alto);
 
+            ctx.fillStyle  = pared.color;
+            ctx.fillRect(pared.x,pared.y,pared.ancho,pared.alto);
+
             update();
             requestAnimationFrame(pintar);
 
             if(jugador.Colision(target)){
                 target.x = Math.floor(Math.random() * 255);
                 target.y = Math.floor(Math.random() * 255);
+            }
+
+            if(jugador.Colision(pared)){
+                switch(direccion){
+                case 'up':
+                if(jugador.y < -20){
+                    jugador.y = 500;
+                }else{
+                    jugador.y += jugador.velocidad;
+                }
+                break;
+                case 'down':
+                if(jugador.y > 520){
+                    jugador.y = 0
+                }else{
+                    jugador.y -= jugador.velocidad;
+                }
+                break;
+                case 'left':
+                if(jugador.x < -20){
+                    jugador.x = 600;
+                }else{
+                    jugador.x += jugador.velocidad;
+                }
+                break;
+                case 'right':
+                if(jugador.x > 620){
+                    jugador.x = 0;
+                }else{
+                    jugador.x -= jugador.velocidad;
+                }
+                break;
+            }
             }
         };
         requestAnimationFrame(pintar);
