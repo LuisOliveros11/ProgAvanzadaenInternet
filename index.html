@@ -9,7 +9,7 @@
             background-color: black;
         }
         canvas{
-            background-color: rgb(11, 28, 124);
+            background-color: gray;
         }
     </style>
 </head>
@@ -20,103 +20,126 @@
 
         const ctx = myCanvas.getContext("2d");
 
-        ctx.fillStyle  = "#097100";
-        ctx.fillRect(0, 360,600,20);
+        class Rectangulo{
+            constructor(color, x, y, alto, ancho,velocidad) {
+                this.alto = alto;
+                this.ancho = ancho;
+                this.color = color;
+                this.x = x;
+                this.y = y;
+                this.velocidad = velocidad;
+            }
 
-        ctx.fillStyle  = "#0ead00";
-        ctx.fillRect(0, 340,600,20);
-
-        ctx.fillStyle  = "#15ff00";
-        ctx.fillRect(0, 320,600,20);
-
-        ctx.beginPath();
-        ctx.arc(480, 260, 20, 0, 2 * Math.PI);
-        ctx.fillStyle  = "#f3ff00";
-        ctx.fill();
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.arc(480, 260, 17, 0, 2 * Math.PI);
-        ctx.fillStyle  = ("#0b1c7c");
-        ctx.fill();
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.arc(200, 260, 20, 0, 2 * Math.PI);
-        ctx.fillStyle  = "#f3ff00";
-        ctx.fill();
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.arc(200, 260, 17, 0, 2 * Math.PI);
-        ctx.fillStyle  = ("#0b1c7c");
-        ctx.fill();
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.arc(110, 260, 20, 0, 2 * Math.PI);
-        ctx.fillStyle  = "#f3ff00";
-        ctx.fill();
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.arc(110, 260, 17, 0, 2 * Math.PI);
-        ctx.fillStyle  = ("#0b1c7c");
-        ctx.fill();
-        ctx.stroke();
-
-        ctx.fillStyle ="#7c580b";
-        ctx.fillRect(290,140,10,180);
-
-        ctx.beginPath();
-        ctx.moveTo(300,150);
-        ctx.lineTo(240,200);
-        ctx.lineTo(270,130);
-        ctx.lineTo(220,130);
-        ctx.lineTo(250,110);
-        ctx.lineTo(210,90);
-        ctx.lineTo(270,110);
-        ctx.lineTo(260,50);
-        ctx.lineTo(300,100);
-        ctx.lineTo(290,80);
-        ctx.lineTo(330,110);
-        ctx.lineTo(335,80);
-        ctx.lineTo(340,130);
-        ctx.lineTo(350,180);
-        ctx.lineTo(300,150);
-        ctx.fillStyle ="#2cc21d";
-        ctx.fill();
-        ctx.stroke();
-
-        for (let x = 0; x < 600; x+=80) {
-            ctx.fillStyle  = "#664a0c";
-            ctx.fillRect(x, 460,40,40);
+            Colision(objetivo){
+                if(this.x < objetivo.x + objetivo.ancho && 
+                   this.x + this.ancho > objetivo.x &&
+                   this.y < objetivo.y + objetivo.ancho &&
+                   this.y + this.ancho > objetivo.ancho){ 
+                    return true;    
+                }
+                return false;
+            }
         }
 
-        for (let x = 40; x < 600; x+=80) {
-            ctx.fillStyle  = "#664a0c";
-            ctx.fillRect(x, 420,40,40);
+        var jugador = new Rectangulo("Red", 200, 200, 30, 30, 5);
+        var target = new Rectangulo("Yellow", 100, 100, 10, 10, null);
+        var direccion = '';
+
+        function getRandomColor() {
+            var trans = '0.5'; // 50% transparency
+            color = 'rgba(';
+            for (var i = 0; i < 3; i++) {
+                color += Math.floor(Math.random() * 255) + ',';
+            }
+            color += trans + ')'; // add the transparency
+            return color;
+        }   
+
+        document.addEventListener('keypress', function(e){
+            switch(e.keyCode){
+                case 119:
+                    direccion = 'up';
+                break;
+                case 115:
+                    direccion = 'down';
+                break;
+                case 97:
+                    direccion = 'left';
+                break;
+                case 100:
+                    direccion = 'right';
+                break;
+                case 32:
+                    jugador.velocidad += 3;
+                break;
+            }
+        });
+
+        function update(){
+            switch(direccion){
+                case 'up':
+                if(jugador.y < -20){
+                    jugador.y = 500;
+                }else{
+                    jugador.y -= jugador.velocidad;
+                }
+                break;
+                case 'down':
+                if(jugador.y > 520){
+                    jugador.y = 0
+                }else{
+                    jugador.y += jugador.velocidad;
+                }
+                break;
+                case 'left':
+                if(jugador.x < -20){
+                    jugador.x = 600;
+                }else{
+                    jugador.x -= jugador.velocidad;
+                }
+                break;
+                case 'right':
+                if(jugador.x > 620){
+                    jugador.x = 0;
+                }else{
+                    jugador.x += jugador.velocidad;
+                }
+                break;
+            }
         }
 
-        for (let x = 0; x < 600; x+=80) {
-            ctx.fillStyle  = "#664a0c";
-            ctx.fillRect(x, 380,40,40);
-        }
+        function pintar(){
+            ctx.fillStyle  = 'gray';
+            ctx.fillRect(0,0,600,500);
 
-        for (let x = 40; x < 600; x+=80) {
-            ctx.fillStyle  = "#c28000";
-            ctx.fillRect(x, 460,40,40);
-        }
+            ctx.fillStyle  = 'white';
+            ctx.font = "30px Arial";
+            ctx.fillText("Velocidad="+ jugador.velocidad, 400, 50);   
 
-        for (let x = 0; x < 600; x+=80) {
-            ctx.fillStyle  = "#c28000";
-            ctx.fillRect(x, 420,40,40);
-        }
+            ctx.fillStyle  = jugador.color;
+            ctx.fillRect(jugador.x,jugador.y,jugador.ancho,jugador.alto);
 
-        for (let x = 40; x < 600; x+=80) {
-            ctx.fillStyle  = "#c28000";
-            ctx.fillRect(x, 380,40,40);
-        }
+            ctx.fillStyle  = target.color;
+            ctx.fillRect(target.x,target.y,target.ancho,target.alto);
+
+            update();
+            requestAnimationFrame(pintar);
+
+            if(jugador.Colision(target)){
+                target.x = Math.floor(Math.random() * 255);
+                target.y = Math.floor(Math.random() * 255);
+            }
+        };
+        requestAnimationFrame(pintar);
+
+        window.requestAnimationFrame = (function () {
+        return window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        function (callback) {
+            window.setTimeout(callback, 17);
+        };
+}());
 
     </script>
 </body>
