@@ -51,6 +51,8 @@
         var jugador = new Rectangulo("Red", 200, 200, 30, 30, 5);
         var target = new Rectangulo("Yellow", 100, 100, 10, 10, null);
         var direccion = '';
+        var marcador = 0;
+        var pausa = false;
 
         function getRandomColor() {
             var trans = '0.5'; // 50% transparency
@@ -77,13 +79,14 @@
                     direccion = 'right';
                 break;
                 case 32:
-                    jugador.velocidad += 3;
+                    pausa = !pausa;
                 break;
             }
         });
 
         function update(){
-            switch(direccion){
+            if(!pausa){
+                switch(direccion){
                 case 'up':
                 if(jugador.y < -20){
                     jugador.y = 500;
@@ -113,15 +116,25 @@
                 }
                 break;
             }
+            }
         }
 
         function pintar(){
             ctx.fillStyle  = 'gray';
             ctx.fillRect(0,0,600,500);
+            
+            if(pausa){
+                ctx.fillStyle = "rgba(210,207,206,0.5)";
+                ctx.fillRect(0,0,600,500);
+
+                ctx.fillStyle  = 'white';
+                ctx.font = "50px Arial";
+                ctx.fillText("P A U S A D O", 120, 230);  
+            }
 
             ctx.fillStyle  = 'white';
             ctx.font = "30px Arial";
-            ctx.fillText("Velocidad="+ jugador.velocidad, 400, 50);   
+            ctx.fillText("Marcador= "+ marcador, 430, 30);   
 
             ctx.fillStyle  = jugador.color;
             ctx.fillRect(jugador.x,jugador.y,jugador.ancho,jugador.alto);
@@ -135,6 +148,9 @@
             if(jugador.Colision(target)){
                 target.x = Math.floor(Math.random() * 255);
                 target.y = Math.floor(Math.random() * 255);
+
+                marcador ++;
+                jugador.velocidad++;
             }
 
             paredes.forEach(function (pared, i, array) {
