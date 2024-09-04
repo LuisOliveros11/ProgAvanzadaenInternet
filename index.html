@@ -41,9 +41,15 @@
             }
         }
 
+        const paredes = [];
+
+        paredes.push(new Rectangulo("Black",110,300,20,300,null));
+        paredes.push(new Rectangulo("Black",110,400,20,300,null));
+        paredes.push(new Rectangulo("Black",110,50,20,300,null));
+        paredes.push(new Rectangulo("Black",450,110,300,20,null));
+
         var jugador = new Rectangulo("Red", 200, 200, 30, 30, 5);
         var target = new Rectangulo("Yellow", 100, 100, 10, 10, null);
-        var pared = new Rectangulo("Black",110,300,20,300,null);
         var direccion = '';
 
         function getRandomColor() {
@@ -123,9 +129,6 @@
             ctx.fillStyle  = target.color;
             ctx.fillRect(target.x,target.y,target.ancho,target.alto);
 
-            ctx.fillStyle  = pared.color;
-            ctx.fillRect(pared.x,pared.y,pared.ancho,pared.alto);
-
             update();
             requestAnimationFrame(pintar);
 
@@ -134,7 +137,13 @@
                 target.y = Math.floor(Math.random() * 255);
             }
 
-            if(jugador.Colision(pared)){
+            paredes.forEach(function (pared, i, array) {
+                ctx.fillStyle  = pared.color;
+                ctx.fillRect(pared.x,pared.y,pared.ancho,pared.alto);
+            });
+
+            paredes.forEach(function (pared, i, array) {
+                if(jugador.Colision(pared)){
                 switch(direccion){
                 case 'up':
                 if(jugador.y < -20){
@@ -165,7 +174,8 @@
                 }
                 break;
             }
-            }
+            } 
+            });
         };
         requestAnimationFrame(pintar);
 
