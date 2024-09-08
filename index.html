@@ -14,6 +14,7 @@
     </style>
 </head>
 <body>
+    <img src="nave.png" id="nave" alt="" hidden>
     <canvas id="myCanvas" width="600" height="500"></canvas>
     <script type="text/javascript">
         const myCanvas = document.getElementById("myCanvas");
@@ -53,6 +54,7 @@
         var direccion = '';
         var marcador = 0;
         var pausa = false;
+        const punto = new Audio("punto.mp3");
 
         function getRandomColor() {
             var trans = '0.5'; // 50% transparency
@@ -132,12 +134,16 @@
                 ctx.fillText("P A U S A D O", 120, 230);  
             }
 
+            const img = document.getElementById("nave");
+            ctx.drawImage(img, jugador.x, jugador.y, jugador.ancho, jugador.alto);
+
+
             ctx.fillStyle  = 'white';
             ctx.font = "30px Arial";
             ctx.fillText("Marcador= "+ marcador, 430, 30);   
 
-            ctx.fillStyle  = jugador.color;
-            ctx.fillRect(jugador.x,jugador.y,jugador.ancho,jugador.alto);
+            /*ctx.fillStyle  = jugador.color;
+            ctx.fillRect(jugador.x,jugador.y,jugador.ancho,jugador.alto);*/
 
             ctx.fillStyle  = target.color;
             ctx.fillRect(target.x,target.y,target.ancho,target.alto);
@@ -151,6 +157,7 @@
 
                 marcador ++;
                 jugador.velocidad++;
+                punto.play();
             }
 
             paredes.forEach(function (pared, i, array) {
@@ -202,7 +209,7 @@
         function (callback) {
             window.setTimeout(callback, 17);
         };
-}());
+        }());
 
     </script>
 </body>
