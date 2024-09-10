@@ -1,0 +1,14 @@
+body{
+    background-color: rgb(225, 215, 215);
+}
+h1{
+    text-align: center;
+}
+input{
+    margin-right: 10px;
+}
+
+#resultado{
+    font-weight: bolder;
+    margin-left: 10px;
+}
