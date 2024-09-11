@@ -11,48 +11,39 @@
         <h1>
             Hola! {{ mensaje }}
         </h1>
-        <!--CONTADOR BOTON-->
-        <h3>
-            Contador de clicks
-        </h3>
-        <button @click="contador++">
-            Da click aqui: {{ contador }}
-        </button>
+    
+        <H2>
+            Empleados Actuales
+        </H2>
+
+        <ul>
+            <li v-for="empleado in empleados">
+                {{ empleado.nombre }} - {{ empleado.rol }}
+            </li>
+        </ul>
 
         <hr>
 
-        <!--COPIAR TEXTO DEL INPUT AL LABEL-->
-        <h3>
-            Saludo de bienvenida
-        </h3>
-        <form action="">
+        <H2>
+            Añadir Empleado
+        </H2>
+
+        <form action=""></form>
             <fieldset>
                 <label for="">
-                    Escribe tu nombre: 
+                    Nombre del empleado: 
                 </label>
-                <input type="text" v-model="usuario" name="" id="">
+                <input type="text" v-model="nombre" name="" id="">
                 <br>
                 <label for="">
-                    Bienvenido  <span> {{ usuario }} </span>
+                    Rol del empleado: 
                 </label>
+                <input type="text" v-model="rol" name="" id="">
+                <br>
+                <button v-on:click="registarEmpleado" id="registrar"  type="button">
+                    Añadir empleado
+                </button>
             </fieldset>
-        </form>
-
-        <hr>
-
-        <!--CALCULADORA-->
-        <h3>
-            Calculadora básica
-        </h3>
-        <form action="">
-            <input type="number" v-model="numero1" name="" id="">
-            <input type="number" v-model="numero2">
-            <button v-on:click="suma=numero1+numero2"  type="button">
-                =
-            </button>
-            <label for="" id="resultado">
-                {{ suma }}
-            </label>
         </form>
     </div>
 
@@ -61,20 +52,39 @@
     const { createApp, ref } = Vue
     createApp({
         setup() {
-        const mensaje = ref('BIENVENIDOS A VUE')
-        let contador = 0
-        let usuario = ref("")
-        let suma = ref(0)
-        let numero1 = ref(0)
-        let numero2 = ref(0)
+        const mensaje = ref('LISTA DE EMPLEADOS')
+        let empleados = ref([
+            {
+                "nombre": "Luis",
+                "rol": "backend"
+            },
+            {
+                "nombre": "Lalo",
+                "rol": "frontend"
+            },
+            {
+                "nombre": "Oscar",
+                "rol": "movil"
+            }
+        ])
+
         return {
             mensaje, 
-            contador: ref(contador),
-            usuario,
-            suma,
-            numero1,
-            numero2
+            empleados
         }
+        },
+        methods: {
+            registarEmpleado(){
+                let obj_Tmp = {
+                    "nombre": this.nombre,
+                    "rol": this.rol
+                }
+
+                this.empleados.push(obj_Tmp)
+
+                this.nombre = ""
+                this.rol = ""
+            }
         }
     }).mount('#home')
     </script>

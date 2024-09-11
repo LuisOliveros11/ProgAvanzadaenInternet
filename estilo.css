@@ -4,11 +4,19 @@ body{
 h1{
     text-align: center;
 }
+h2{
+    text-align: center;
+}
 input{
     margin-right: 10px;
 }
 
-#resultado{
-    font-weight: bolder;
-    margin-left: 10px;
+li{
+    font-size: 20px;
+}
+
+#registrar{
+    display: block;
+    padding: 0.5rem 1rem;
+    margin: 0 auto;
 }
