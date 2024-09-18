@@ -8,16 +8,12 @@
 </head>
 <body>
     <div id="home">
-        <h1>
-            Hola!
-        </h1>
-
-        <H2>
+        <H1>
             Inicio sesion
-        </H2>
+        </H1>
 
-        <form @submit.prevent="login"></form>
-            <fieldset>
+        <form @submit.prevent="login">
+            <fieldset v-if= "!logeado">
                 <label for="">
                     Correo: 
                 </label>
@@ -28,10 +24,14 @@
                 </label>
                 <input type="password" v-model="contraseña" name="" id="">
                 <br>
-                <button id="Verificar" type="submit" @onclick="login">
+                <button id="Verificar" type="submit">
                     Verificar
                 </button>
             </fieldset>
+
+            <h1 v-if="logeado">
+                Inicio de sesión exitoso
+            </h1>
         </form>
     </div>
 
@@ -42,10 +42,12 @@
         setup() {
         const correo = ref('')
         const contraseña = ref('')
+        let logeado = ref(false)
         
         return {
             correo, 
-            contraseña
+            contraseña,
+            logeado
         }
         },
 
@@ -53,8 +55,16 @@
             login(){
                 fetch("usuarios.json")
                 .then(res => res.json())
-                .then(data => console.log(data))
-                console.log("estoy entrando al fetch")
+                .then(res => {
+                    res.forEach(element => {
+                        if(element.email == this.correo && element.password == this.contraseña){
+                            this.logeado = true;
+                        }
+                    });
+                    if(!this.logeado){
+                        alert("Error")
+                    }
+                })
             }
         }
     }).mount('#home')
