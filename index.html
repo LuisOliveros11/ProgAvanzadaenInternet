@@ -4,44 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="estilo.css">
-    <title>Vue</title>
+    <title>Inicio sesion</title>
 </head>
 <body>
     <div id="home">
         <h1>
-            Hola! {{ mensaje }}
+            Hola!
         </h1>
-    
-        <H2>
-            Empleados Actuales
-        </H2>
-
-        <ul>
-            <li v-for="empleado in empleados">
-                {{ empleado.nombre }} - {{ empleado.rol }}
-            </li>
-        </ul>
-
-        <hr>
 
         <H2>
-            Añadir Empleado
+            Inicio sesion
         </H2>
 
-        <form action=""></form>
+        <form @submit.prevent="login"></form>
             <fieldset>
                 <label for="">
-                    Nombre del empleado: 
+                    Correo: 
                 </label>
-                <input type="text" v-model="nombre" name="" id="">
+                <input type="email" v-model="correo" name="" id="">
                 <br>
                 <label for="">
-                    Rol del empleado: 
+                    Contraseña: 
                 </label>
-                <input type="text" v-model="rol" name="" id="">
+                <input type="password" v-model="contraseña" name="" id="">
                 <br>
-                <button v-on:click="registarEmpleado" id="registrar"  type="button">
-                    Añadir empleado
+                <button id="Verificar" type="submit" @onclick="login">
+                    Verificar
                 </button>
             </fieldset>
         </form>
@@ -52,38 +40,21 @@
     const { createApp, ref } = Vue
     createApp({
         setup() {
-        const mensaje = ref('LISTA DE EMPLEADOS')
-        let empleados = ref([
-            {
-                "nombre": "Luis",
-                "rol": "backend"
-            },
-            {
-                "nombre": "Lalo",
-                "rol": "frontend"
-            },
-            {
-                "nombre": "Oscar",
-                "rol": "movil"
-            }
-        ])
-
+        const correo = ref('')
+        const contraseña = ref('')
+        
         return {
-            mensaje, 
-            empleados
+            correo, 
+            contraseña
         }
         },
+
         methods: {
-            registarEmpleado(){
-                let obj_Tmp = {
-                    "nombre": this.nombre,
-                    "rol": this.rol
-                }
-
-                this.empleados.push(obj_Tmp)
-
-                this.nombre = ""
-                this.rol = ""
+            login(){
+                fetch("usuarios.json")
+                .then(res => res.json())
+                .then(data => console.log(data))
+                console.log("estoy entrando al fetch")
             }
         }
     }).mount('#home')
