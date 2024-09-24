@@ -29,8 +29,8 @@
                 </button>
             </fieldset>
 
-            <h1 v-if="logeado">
-                <table id="tabla_Empleados">
+            <h1>
+                <table id="tabla_Empleados" v-if="logeado && !editar">
                     <tr>
                         <th>Datos personales</th>
                         <th>Información de contacto</th>
@@ -42,12 +42,45 @@
                         <td>{{ empleado.name }}, {{ empleado.username }}</td>
                         <td>{{ empleado.email }}, {{ empleado.phone }}</td>
                         <td>{{ empleado.company.name }}, {{ empleado.company.catchPhrase }}, {{ empleado.company.bs }}</td>
-                        <td> <button> Editar </button></td>
+                        <td> <button @click="Editar(empleado.email)"> Editar </button></td>
                         <td> <button @click="Eliminar(empleado.email)"> Eliminar </button></td>
                     </tr>
                 </table>
-            </h1>
+            </h1>            
         </form>
+
+        <div class="formulario" id="formulario_Edicion">
+            <form v-if= "editar" class="form_Editar">
+                <fieldset>
+                    <label for="">
+                        {{ editar }}
+                        <br>
+                        Datos personales: 
+                    </label>
+                    <br>
+                    <input type="text" v-model="datos_Personales" name="" id="">
+                    <br>
+                    <label for="">
+                        Información de contacto: 
+                    </label>
+                    <br>
+                    <input type="text" v-model="info_Contacto" name="" id="">
+                    <br>
+                    <label for="">
+                        Información de la empresa: 
+                    </label>
+                    <br>
+                    <input type="text" v-model="info_Empresa" name="" id="">
+                    <br>
+                    <button id="cancelar" type="button" @click="cancelar_Edicion()">
+                        Cancelar
+                    </button>
+                    <button id="confirmar" type="button" @click="conf_Edicion(nombre_Original)">
+                        Confirmar
+                    </button>
+                </fieldset>
+            </form>
+        </div>
     </div>
 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -58,13 +91,29 @@
         const correo = ref('')
         const contraseña = ref('')
         let logeado = ref(false)
+        let editar = ref(false)
+        let nombre_Original = ref('')
+        let datos_Personales_Nuevos = ref([])
+        let info_Empresa_Nuevo = ref([])
+        let info_Contacto_Nuevo = ref([])
         const empleados = ref([])
+        const datos_Personales = ref('')
+        const info_Contacto = ref('')
+        const info_Empresa = ref('')
         
         return {
             correo, 
             contraseña,
             logeado,
-            empleados
+            empleados,
+            editar,
+            datos_Personales,
+            info_Contacto,
+            info_Empresa,
+            nombre_Original,
+            datos_Personales_Nuevos,
+            info_Contacto_Nuevo,
+            info_Empresa_Nuevo
         }
         },
         methods: {
@@ -75,11 +124,7 @@
                     res.forEach(element => {
                         if(element.email == this.correo && element.password == this.contraseña){
                             this.logeado = true;
-                            fetch("usuarios.json")
-                            .then(res => res.json())
-                            .then(res => {
-                                this.empleados = res;
-                            })
+                            localStorage.setItem("datos", JSON.stringify(element));
                         }
                     });
                     if(!this.logeado){
@@ -88,16 +133,56 @@
                 })
             },
             Eliminar(email){
-                for (let index = 0; index < this.empleados.length; index++) {
-                    if(this.empleados[index].email == email){
-                        console.log(this.empleados[index].email)
-                        console.log(this.empleados[index])
-                        this.empleados.splice(index,1)
+                this.empleados.forEach(empleado => {
+                    if(empleado.email == email){
+                        this.empleados.splice(empleado,1)
                     }
-                break;
-                }
+                });
+            },
+            Editar(email){
+                this.editar = true;
+                this.empleados.forEach(empleado => {
+                    if(empleado.email == email){
+                        this.datos_Personales = `${empleado.name}, ${empleado.username}`
+                        this.nombre_Original = empleado.name
+                        this.info_Contacto = `${empleado.email}, ${empleado.phone}`
+                        this.info_Empresa = `${empleado.company.name}, ${empleado.company.catchPhrase}, ${empleado.company.bs}`
+                    }
+                });
+            },
+            conf_Edicion(nombre_Original){
+                this.datos_Personales_Nuevos = this.datos_Personales.split(",")
+                this.info_Contacto_Nuevo = this.info_Contacto.split(",")
+                this.info_Empresa_Nuevo = this.info_Empresa.split(",")
+                this.empleados.map(empleado => {
+                    if(empleado.name == nombre_Original){
+                        empleado.name = this.datos_Personales_Nuevos[0]
+                        empleado.username = this.datos_Personales_Nuevos[1]
+                        empleado.email = this.info_Contacto_Nuevo[0]
+                        empleado.phone = this.info_Contacto_Nuevo[1]
+                        empleado.company.name = this.info_Empresa_Nuevo[0]
+                        empleado.company.catchPhrase = this.info_Empresa_Nuevo[1]
+                        empleado.company.bs = this.info_Empresa_Nuevo[2]
+                    }
+                    this.editar = false;
+                });
+            },
+            cancelar_Edicion(){
+                this.editar = false;
             }
-        }
+    },
+    mounted() { 
+            fetch("usuarios.json")
+            .then(res => res.json())
+            .then(res => {
+                this.empleados = res;
+            })
+		    let datos = localStorage.getItem("datos");
+		    if (datos != null) {
+		    	datos = JSON.parse(datos) 
+                this.logeado = true;
+		    }
+		}
     }).mount('#home')
     </script>
 </body>
