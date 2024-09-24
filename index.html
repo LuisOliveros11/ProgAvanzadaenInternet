@@ -35,11 +35,15 @@
                         <th>Datos personales</th>
                         <th>Información de contacto</th>
                         <th>Información de la empresa</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
                     </tr>
                     <tr v-for="empleado in empleados">
                         <td>{{ empleado.name }}, {{ empleado.username }}</td>
                         <td>{{ empleado.email }}, {{ empleado.phone }}</td>
                         <td>{{ empleado.company.name }}, {{ empleado.company.catchPhrase }}, {{ empleado.company.bs }}</td>
+                        <td> <button> Editar </button></td>
+                        <td> <button @click="Eliminar(empleado.email)"> Eliminar </button></td>
                     </tr>
                 </table>
             </h1>
@@ -82,6 +86,16 @@
                         alert("Error")
                     }
                 })
+            },
+            Eliminar(email){
+                for (let index = 0; index < this.empleados.length; index++) {
+                    if(this.empleados[index].email == email){
+                        console.log(this.empleados[index].email)
+                        console.log(this.empleados[index])
+                        this.empleados.splice(index,1)
+                    }
+                break;
+                }
             }
         }
     }).mount('#home')
