@@ -30,21 +30,24 @@
             </fieldset>
 
             <h1>
-                <table id="tabla_Empleados" v-if="logeado && !editar">
+                <table id="tabla_Empleados" v-if="logeado && !editar && !add">
                     <tr>
-                        <th>Datos personales</th>
-                        <th>Información de contacto</th>
-                        <th>Información de la empresa</th>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Nombre de la empresa</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
                     </tr>
                     <tr v-for="empleado in empleados">
-                        <td>{{ empleado.name }}, {{ empleado.username }}</td>
-                        <td>{{ empleado.email }}, {{ empleado.phone }}</td>
-                        <td>{{ empleado.company.name }}, {{ empleado.company.catchPhrase }}, {{ empleado.company.bs }}</td>
+                        <td>{{ empleado.name }}</td>
+                        <td>{{ empleado.email }}</td>
+                        <td>{{ empleado.company.name }}</td>
                         <td> <button @click="Editar(empleado.email)"> Editar </button></td>
                         <td> <button @click="Eliminar(empleado.email)"> Eliminar </button></td>
                     </tr>
+                    <button id="añadir" type="button" @click="add_Empleado()">
+                        Añadir empleado
+                    </button>
                 </table>
             </h1>            
         </form>
@@ -53,19 +56,19 @@
             <form v-if= "editar" class="form_Editar">
                 <fieldset>
                     <label for="">
-                        Datos personales: 
+                        Nombre
                     </label>
                     <br>
                     <input type="text" v-model="datos_Personales" name="" id="">
                     <br>
                     <label for="">
-                        Información de contacto: 
+                        Correo: 
                     </label>
                     <br>
                     <input type="text" v-model="info_Contacto" name="" id="">
                     <br>
                     <label for="">
-                        Información de la empresa: 
+                        Nombre de la empresa: 
                     </label>
                     <br>
                     <input type="text" v-model="info_Empresa" name="" id="">
@@ -74,6 +77,37 @@
                         Cancelar
                     </button>
                     <button id="confirmar" type="button" @click="conf_Edicion(nombre_Original)">
+                        Confirmar
+                    </button>
+                </fieldset>
+            </form>
+        </div>
+
+        <div class="formulario" id="formulario_Añadir">
+            <form v-if= "add" class="form_Añadir" @submit.prevent="conf_Add()">
+                <fieldset>
+                    <label for="">
+                        Nombre: 
+                    </label>
+                    <br>
+                    <input type="text" v-model="nombre_Add" name="" id="">
+                    <br>
+                    <label for="">
+                        Correo: 
+                    </label>
+                    <br>
+                    <input type="text" v-model="correo_Add" name="" id="">
+                    <br>
+                    <label for="">
+                        Nombre de la empresa: 
+                    </label>
+                    <br>
+                    <input type="text" v-model="empresa_Add" name="" id="">
+                    <br>
+                    <button id="cancelar" type="button" @click="cancelar_Add()">
+                        Cancelar
+                    </button>
+                    <button id="confirmar" type="submit">
                         Confirmar
                     </button>
                 </fieldset>
@@ -90,7 +124,11 @@
         const contraseña = ref('')
         let logeado = ref(false)
         let editar = ref(false)
+        let add = ref(false)
         let nombre_Original = ref('')
+        let correo_Add = ref('')
+        let nombre_Add = ref('')
+        let empresa_Add = ref('')
         let datos_Personales_Nuevos = ref([])
         let info_Empresa_Nuevo = ref([])
         let info_Contacto_Nuevo = ref([])
@@ -111,7 +149,11 @@
             nombre_Original,
             datos_Personales_Nuevos,
             info_Contacto_Nuevo,
-            info_Empresa_Nuevo
+            info_Empresa_Nuevo,
+            add,
+            nombre_Add,
+            correo_Add,
+            empresa_Add
         }
         },
         methods: {
@@ -141,10 +183,10 @@
                 this.editar = true;
                 this.empleados.forEach(empleado => {
                     if(empleado.email == email){
-                        this.datos_Personales = `${empleado.name}, ${empleado.username}`
+                        this.datos_Personales = `${empleado.name}`
                         this.nombre_Original = empleado.name
-                        this.info_Contacto = `${empleado.email}, ${empleado.phone}`
-                        this.info_Empresa = `${empleado.company.name}, ${empleado.company.catchPhrase}, ${empleado.company.bs}`
+                        this.info_Contacto = `${empleado.email}`
+                        this.info_Empresa = `${empleado.company.name}`
                     }
                 });
             },
@@ -167,7 +209,25 @@
             },
             cancelar_Edicion(){
                 this.editar = false;
-            }
+            },
+            add_Empleado(){
+                this.add = true;
+                console.log(this.add)
+            },
+            conf_Add(){
+                let obj_Tmp = {
+                    "name": this.nombre_Add,
+                    "email": this.correo_Add,
+                    "company":{
+                        "name": this.empresa_Add
+                    }
+                }
+                this.empleados.push(obj_Tmp)
+                this.add = false;
+            },
+            cancelar_Add(){
+                this.add = false;
+            },
     },
     mounted() { 
             fetch("usuarios.json")
