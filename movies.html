@@ -63,8 +63,9 @@ createApp({
 mounted() { 
 		let logeado = localStorage.getItem("logeado");
 		let usuario = localStorage.getItem("usuario");
-        let session_id = localStorage.getItem("session_id");
         let pelicula_Detalles = localStorage.getItem("pelicula_Detalles");
+        let request_token = localStorage.getItem("request_token");
+        let session_id = localStorage.getItem("session_id");
 
 		if (logeado == null && usuario == null) { 
 		    window.location.href = "index.html";

@@ -43,70 +43,100 @@ createApp({
     let usuario = ref('luis_manuel_parada_oliveros')
     let contraseña = ref('123123')
     let session_id = ref("")
+    let request_token = ref("")
     let logeado = ref(false)
     
     return {
         usuario, 
         contraseña,
         logeado,
-        session_id
+        session_id,
+        request_token
     }
     },
     methods: {
         login(){
+            var myHeaders = {"Authorization" : "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5Y2YxMTk4ZjM2NDEwZWEyMzg1MmMwMWMwYzQyNzczMSIsIm5iZiI6MTcyODY2NDkwMy40MjQ5MTIsInN1YiI6IjY3MDRjMWFlY2NiYjRlN2YxNjY5YmQxNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.OW81sIJG9cm7Uoe6pJE73bddvkz007ilp8_kZZzatNM"}
+            var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+            };
+
+            fetch("https://api.themoviedb.org/3/authentication/token/new?api_key=9cf1198f36410ea23852c01c0c427731", requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                this.request_token = result.request_token
+                localStorage.setItem("request_token", this.request_token);
+            })
+            .catch(error => console.log('error', error));
+            this.validarLogin();
+        },
+        validarLogin(){
             const myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
 
             const raw = JSON.stringify({
-            "username": this.usuario,
-            "password": this.contraseña,
-            "request_token": ""
+                "username": this.usuario,
+                "password": this.contraseña,
+                "request_token": this.request_token
             });
 
-            const requestOptions = {
-            method: "POST",
-            headers: myHeaders,
-            body: raw,
-            redirect: "follow"
-            };
-
-            fetch("https://api.themoviedb.org/3/authentication/token/validate_with_login?api_key=9cf1198f36410ea23852c01c0c427731", requestOptions)
+            fetch("https://api.themoviedb.org/3/authentication/token/validate_with_login?api_key=9cf1198f36410ea23852c01c0c427731", {
+                method: "POST",
+                headers: myHeaders,
+                body: raw,
+                redirect: "follow"
+            })
             .then((response) => response.json())
             .then((result) => {
-                console.log(result)
                 if(result.success){
                     this.logeado = true;
                     localStorage.setItem("logeado", this.logeado);
-				  	localStorage.setItem("usuario", this.usuario);
-                      window.location.href = "movies.html";
+                    localStorage.setItem("usuario", this.usuario);
+                    this.crear_Session_ID()
+                    //window.location.href = "movies.html";
                 }else{
-                    alert("Error. Credenciales incorrectas")
+                    alert("Error. Credenciales incorrectas");
                 }
             })
             .catch((error) => console.error(error));
+            
+        },
+        crear_Session_ID(){
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
 
+            var raw = JSON.stringify({
+            "request_token": this.request_token
+            });
 
-            const requestOptions2 = {
-            method: "POST",
-            redirect: "follow"
+            var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
             };
 
-            fetch("https://api.themoviedb.org/3/authentication/guest_session/new?api_key=9cf1198f36410ea23852c01c0c427731\n&api_key=9cf1198f36410ea23852c01c0c427731", requestOptions2)
-            .then((response) => response.json())
-            .then((result) => {
-                this.session_id = result.guest_session_id;
+            fetch("https://api.themoviedb.org/3/authentication/session/new?api_key=9cf1198f36410ea23852c01c0c427731", requestOptions)
+            .then(response => response.json())
+            .then(result =>{
+                console.log(result)
+                this.session_id = result.session_id;
                 localStorage.setItem("session_id", this.session_id);
             })
-            .catch((error) => console.error(error));
+            .catch(error => console.log('error', error));
         }
 },
 mounted() { 
 		let logeado = localStorage.getItem("logeado");
 		let usuario = localStorage.getItem("usuario");
+        let request_token = localStorage.getItem("request_token");
         let session_id = localStorage.getItem("session_id");
+        
 
 		if (logeado != null && usuario != null) { 
-		    window.location.href = "movies.html";
+		    //window.location.href = "movies.html";
 		}
     }
 }).mount('#home')
