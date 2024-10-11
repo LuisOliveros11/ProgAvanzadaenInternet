@@ -3,57 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="main.css">
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
-    <div class="container">
-        <form>
-            <fieldset>
-                <label for="">
-                    Correo: 
-                </label>
-                <br>
-                <input type="email" name="" id="">
-                <br>
-                <label for="">
-                    Contraseña: 
-                </label>
-                <br>
-                <input type="password" name="" id="">
-                <br>
-            </fieldset>          
-        </form>
-
-        <ul>
-            <li>
-                <input type="checkbox" name="" id="">
-                Administrador
-            </li>
-            <li>
-                <input type="checkbox" name="" id="">
-                Gerente
-            </li>
-            <li>
-                <input type="checkbox" name="" id="">
-                Propietario
-            </li>
-            <li>
-                <input type="checkbox" name="" id="">
-                Agente de ventas
-            </li>
-            <li>
-                <input type="checkbox" name="" id="">
-                Prospecto
-            </li>
-        </ul>
-        <button id="Verificar" type="submit">
-            Acceder
-        </button>
-        <br>
-        <a href="">
-            ¿Olvidó su contraseña?
-        </a>
+    <div id="home">
+        <div class="logo_usuario">
+            <img src="usuario.png" alt="usuario">
+        </div>
+        <div class="formulario">
+            <form @submit.prevent="login">
+                <fieldset>
+                    <label for="">
+                        Usuario: 
+                    </label>
+                    <br>
+                    <input type="text" v-model="usuario" name="" id="">
+                    <br>
+                    <label for="">
+                        Contraseña: 
+                    </label>
+                    <br>
+                    <input type="password" v-model="contraseña" name="" id="">
+                    <br>
+                    <button id="Verificar" type="submit">
+                        Verificar
+                    </button>
+                </fieldset>          
+            </form>
+        </div>
     </div> 
 </body>
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+const { createApp, ref } = Vue
+createApp({
+    setup() {
+    let usuario = ref('luis_manuel_parada_oliveros')
+    let contraseña = ref('123123')
+    let session_id = ref("")
+    let logeado = ref(false)
+    
+    return {
+        usuario, 
+        contraseña,
+        logeado,
+        session_id
+    }
+    },
+    methods: {
+        login(){
+            const myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+
+            const raw = JSON.stringify({
+            "username": this.usuario,
+            "password": this.contraseña,
+            "request_token": ""
+            });
+
+            const requestOptions = {
+            method: "POST",
+            headers: myHeaders,
+            body: raw,
+            redirect: "follow"
+            };
+
+            fetch("https://api.themoviedb.org/3/authentication/token/validate_with_login?api_key=9cf1198f36410ea23852c01c0c427731", requestOptions)
+            .then((response) => response.json())
+            .then((result) => {
+                console.log(result)
+                if(result.success){
+                    this.logeado = true;
+                    localStorage.setItem("logeado", this.logeado);
+				  	localStorage.setItem("usuario", this.usuario);
+                      window.location.href = "movies.html";
+                }else{
+                    alert("Error. Credenciales incorrectas")
+                }
+            })
+            .catch((error) => console.error(error));
+
+
+            const requestOptions2 = {
+            method: "POST",
+            redirect: "follow"
+            };
+
+            fetch("https://api.themoviedb.org/3/authentication/guest_session/new?api_key=9cf1198f36410ea23852c01c0c427731\n&api_key=9cf1198f36410ea23852c01c0c427731", requestOptions2)
+            .then((response) => response.json())
+            .then((result) => {
+                this.session_id = result.guest_session_id;
+                localStorage.setItem("session_id", this.session_id);
+            })
+            .catch((error) => console.error(error));
+        }
+},
+mounted() { 
+		let logeado = localStorage.getItem("logeado");
+		let usuario = localStorage.getItem("usuario");
+        let session_id = localStorage.getItem("session_id");
+
+		if (logeado != null && usuario != null) { 
+		    window.location.href = "movies.html";
+		}
+    }
+}).mount('#home')
+</script>
+
 </html>
