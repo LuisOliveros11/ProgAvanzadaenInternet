@@ -107,6 +107,7 @@ createApp({
             .then((response) => response.json())
             .then((result) => {
                 if(result.success){
+                    console.log(result)
                     alert("Calificación enviada correctamente. Gracias")
                 }else{
                     alert("Error al enviar la calificación")
