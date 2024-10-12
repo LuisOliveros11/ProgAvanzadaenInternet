@@ -32,8 +32,8 @@
                 <h3 id="rate">
                     Haz tu rate!
                 </h3>
-                <input type="number" max="10" min="0" id="inputNumber" class="form-control" aria-describedby="numberHelp" placeholder="0">
-                <button type="button" class="btn btn-success">Enviar</button>
+                <input type="number" v-model="calif" max="10" min="0.5" step="0.5" id="inputNumber" class="form-control" aria-describedby="numberHelp" placeholder="0.5">
+                <button type="button" class="btn btn-success" @click="enviarRate()">Enviar</button>
                 <h5 id="tagline">
                     {{detalles_general.tagline}}
                 </h5>
@@ -67,13 +67,15 @@ createApp({
         let generos = ref([]);
         let cast = ref([]);
         let img_Fondo = ref("");
+        let calif = ("");
     
     return {
         detalles_general,
         detalles_creditos,
         cast,
         generos,
-        img_Fondo
+        img_Fondo,
+        calif
     }
     },
     methods: {
@@ -87,7 +89,30 @@ createApp({
             return porcentaje;
     },
         enviarRate(){
+            const myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
 
+            const raw = JSON.stringify({
+                "value": this.calif
+            });
+
+            const requestOptions = {
+            method: "POST",
+            headers: myHeaders,
+            body: raw,
+            redirect: "follow"
+            };
+
+            fetch("https://api.themoviedb.org/3/movie/" + localStorage.getItem("pelicula_Detalles") + "/rating?api_key=9cf1198f36410ea23852c01c0c427731&session_id=e4a0f7e6b9797224ccb081defcea9badd9dcc42b", requestOptions)
+            .then((response) => response.json())
+            .then((result) => {
+                if(result.success){
+                    alert("Calificación enviada correctamente. Gracias")
+                }else{
+                    alert("Error al enviar la calificación")
+                }
+            })
+            .catch((error) => console.error(error));
     }
 },
 mounted() { 
@@ -109,7 +134,6 @@ mounted() {
             .then(response => response.json())
             .then(result =>{
                 this.detalles_general = result;
-                console.log(this.detalles_general)
                 
                 this.detalles_general.genres.forEach(genero => {
                 this.generos.push(genero.name);

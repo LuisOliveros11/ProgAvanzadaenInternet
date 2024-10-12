@@ -68,9 +68,9 @@ createApp({
             .then(result => {
                 this.request_token = result.request_token
                 localStorage.setItem("request_token", this.request_token);
+                this.validarLogin();
             })
             .catch(error => console.log('error', error));
-            this.validarLogin();
         },
         validarLogin(){
             const myHeaders = new Headers();
@@ -95,7 +95,7 @@ createApp({
                     localStorage.setItem("logeado", this.logeado);
                     localStorage.setItem("usuario", this.usuario);
                     this.crear_Session_ID()
-                    //window.location.href = "movies.html";
+                    window.location.href = "movies.html";
                 }else{
                     alert("Error. Credenciales incorrectas");
                 }
@@ -121,7 +121,6 @@ createApp({
             fetch("https://api.themoviedb.org/3/authentication/session/new?api_key=9cf1198f36410ea23852c01c0c427731", requestOptions)
             .then(response => response.json())
             .then(result =>{
-                console.log(result)
                 this.session_id = result.session_id;
                 localStorage.setItem("session_id", this.session_id);
             })
@@ -136,7 +135,7 @@ mounted() {
         
 
 		if (logeado != null && usuario != null) { 
-		    //window.location.href = "movies.html";
+		    window.location.href = "movies.html";
 		}
     }
 }).mount('#home')
