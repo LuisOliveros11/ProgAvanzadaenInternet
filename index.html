@@ -1,109 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>Productos</title>
+    <title>Document</title>
 </head>
 
 <body>
-    <div class="row g-0">
-        <div class="col-2">
-            <div class="sidebar d-none d-md-block bg-dark text-white text-center fs-3 vh-100">
-                <div class="titulo">
-                    Menu
-                </div>
-                <hr>
-                <div class="opciones mt-3 fs-5">
-                    <ul class="list-unstyled">
-                        <li class="mb-4">
-                            <button type="button" class="btn btn-light w-50">
-                                Home
-                            </button>
-                        </li>
-                        <li class="mb-4">
-                            <button type="button" class="btn btn-light w-50">
-                                Dashboard
-                            </button>
-                        </li>
-                        <li class="mb-4">
-                            <button type="button" class="btn btn-light w-50">
-                                Pedidos
-                            </button>
-                        </li>
-                        <li class="mb-4">
-                            <button type="button" class="btn btn-light w-50">
-                                Productos
-                            </button>
-                        </li>
-                        <li class="mb-4">
-                            <button type="button" class="btn btn-light w-50">
-                                Clientes
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <img src="acceso.png"
+                    class="img-fluid rounded mx-auto d-block col-6 shadow p-3 mb-5 bg-body-tertiary rounded" alt="">
 
-        </div>
-        <div class="col navbar-full">
-            <div class="barra">
-                <nav class="navbar navbar-expand-lg bg-body-tertiary d-md-vw-100" data-bs-theme="dark">
-                    <div class="container-fluid">
-                        <a class="navbar-brand" href="#">Inicio</a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="#">Tienda</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Ofertas</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        Productos
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Camisa</a></li>
-                                        <li><a class="dropdown-item" href="#">Pantalones</a></li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <li><a class="dropdown-item" href="#">Ayuda</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <form class="d-flex" role="search">
-                                <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-                                <button class="btn btn-outline-success" type="submit">Buscar</button>
-                            </form>
-                        </div>
+                <form action="App/AuthController.php" method="post">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Correo electrónico</label>
+                        <input type="email" class="form-control shadow-sm p-2 mb-1 bg-body-tertiary rounded"
+                            id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+                        <div id="emailHelp" class="form-text">Tu información está segura.</div>
                     </div>
-                </nav>
-                <div class="cartas">
-                    <div class="row ms-5">
-                        <div class="col">
-                            <div class="card mt-5" style="width: 22rem;">
-                                <img src="https://chefmart.com.mx/cdn/shop/files/TETRANECTARDEMANZANA1L_21f5bf5e-ca7e-45b9-9ce6-a7e7d51debc2_1600x.png?v=1693928681"
-                                    class="card-img-top h-50" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Jugo Jumex</h5>
-                                    <p class="card-text">Jugo de marca Jumex sabor manzana fortificada.</p>
-                                    <a href="detalles.html" class="btn btn-primary w-75">Comprar</a>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control shadow-sm p-2 mb-1 bg-body-tertiary rounded"
+                            id="exampleInputPassword1" name="password">
                     </div>
-                </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Marcame</label>
+                    </div>
+                    <button type="submit" class="btn btn-success mx-auto d-block col-3">Enviar</button>
+
+                    <input type="hidden" value="login" name="login">
+                </form>
+            </div>
+            <div class="col-6">
+               <img src="derecha.jpeg" class="img-fluid rounded mx-auto d-block col-6 shadow p-3 mt-5 mb-5 bg-body-tertiary rounded" alt="">
             </div>
         </div>
     </div>
