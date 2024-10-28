@@ -105,7 +105,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title"><?php echo $producto->name; ?></h5>
                                     <p class="card-text"><?php echo $producto->description; ?></p>
-                                    <a href="detalles.html" class="btn btn-primary w-75">Detalles</a>
+                                    <a href="detalles.php?slug=<?php echo $producto->slug; ?>" class="btn btn-primary w-75">Detalles</a>
                                 </div>
                             </div>
                         </div>

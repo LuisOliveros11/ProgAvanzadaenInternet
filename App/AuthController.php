@@ -66,5 +66,31 @@ session_start();
             curl_close($curl);
             return $response->data;
         }
+
+        public function obtenerProductoPorSlug($slug){
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://crud.jonathansoto.mx/api/products/slug/$slug",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                'Authorization: Bearer 1069|Fqb1G5aGbz6guBHkXWOaQ0tqA4IlUhHKrOe3IkDk'
+            ),
+            ));
+
+            $response = curl_exec($curl);
+            $response = json_decode($response);
+
+            curl_close($curl);
+
+            return $response->data;
+
+        }
     }
 ?>
