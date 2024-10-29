@@ -10,10 +10,10 @@
 </head>
 
 <body>
-    <?php include "App/AuthController.php"?>
-    <?php 
-            $authController = new AuthController();  
-            $listaProductos = $authController->obtenerProductos(); 
+    <?php include "App/AuthController.php" ?>
+    <?php
+    $authController = new AuthController();
+    $listaProductos = $authController->obtenerProductos();
     ?>
     <div class="row g-0">
         <div class="col-2">
@@ -95,21 +95,68 @@
                         </div>
                     </div>
                 </nav>
-                <div class="cartas">
-                    <div class="row ms-5">
-                    <?php foreach ($listaProductos as $producto): ?>
-                        <div class="col-3">
-                            <div class="card mt-5" style="width: 22rem;">
-                                <img src="<?php echo $producto->cover; ?>"
-                                    class="card-img-top h-50" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title"><?php echo $producto->name; ?></h5>
-                                    <p class="card-text"><?php echo $producto->description; ?></p>
-                                    <a href="detalles.php?slug=<?php echo $producto->slug; ?>" class="btn btn-primary w-75">Detalles</a>
-                                </div>
+                <!-- Button trigger modal -->
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop">
+                        Añadir producto
+                    </button>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Añadir producto</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="App/AñadirProductoController.php" method="post">
+                                    <div class="mb-3">
+                                        <label for="exampleNombre" class="form-label">Nombre</label>
+                                        <input type="text" class="form-control" id="exampleNombre"
+                                            aria-describedby="" name="nombre">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleSlug" class="form-label">Slug</label>
+                                        <input type="text" class="form-control" id="exampleSlug" name="slug">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleDescripcion" class="form-label">Descripcion</label>
+                                        <input type="text" class="form-control" id="exampleDescripcion"
+                                            aria-describedby="" name="descripcion">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleFeatures" class="form-label">Features</label>
+                                        <input type="text" class="form-control" id="exampleFeatures" name="features">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary" name="add">Añadir</button>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Cancelar</button>
                             </div>
                         </div>
-                    <?php endforeach; ?>
+                    </div>
+                </div>
+                <div class="cartas">
+                    <div class="row ms-5">
+                        <?php foreach ($listaProductos as $producto): ?>
+                            <div class="col-3">
+                                <div class="card mt-5" style="width: 22rem;">
+                                    <img src="<?php echo $producto->cover; ?>" class="card-img-top h-50" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><?php echo $producto->name; ?></h5>
+                                        <p class="card-text"><?php echo $producto->description; ?></p>
+                                        <a href="detalles.php?slug=<?php echo $producto->slug; ?>"
+                                            class="btn btn-primary w-75">Detalles</a>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
