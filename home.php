@@ -95,14 +95,12 @@
                         </div>
                     </div>
                 </nav>
-                <!-- Button trigger modal -->
                 <div class="d-grid gap-2 col-6 mx-auto">
                     <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop">
                         Añadir producto
                     </button>
                 </div>
-                <!-- Modal -->
                 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
                     tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -116,8 +114,8 @@
                                 <form action="App/AñadirProductoController.php" method="post">
                                     <div class="mb-3">
                                         <label for="exampleNombre" class="form-label">Nombre</label>
-                                        <input type="text" class="form-control" id="exampleNombre"
-                                            aria-describedby="" name="nombre">
+                                        <input type="text" class="form-control" id="exampleNombre" aria-describedby=""
+                                            name="nombre">
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleSlug" class="form-label">Slug</label>
@@ -152,7 +150,64 @@
                                         <h5 class="card-title"><?php echo $producto->name; ?></h5>
                                         <p class="card-text"><?php echo $producto->description; ?></p>
                                         <a href="detalles.php?slug=<?php echo $producto->slug; ?>"
-                                            class="btn btn-primary w-75">Detalles</a>
+                                            class="btn btn-primary w-50">Detalles</a>
+
+                                        <div class="">
+                                            <button type="button" class="btn btn-warning mt-3 w-50" data-bs-toggle="modal"
+                                                data-bs-target="#<?php echo $producto->slug; ?>" >
+                                                Editar
+                                            </button>
+                                        </div>
+                                        <div class="modal fade" id="<?php echo $producto->slug; ?>" data-bs-backdrop="static"
+                                            data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar
+                                                            producto</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="App/EditarProductoController.php" method="post">
+                                                            <div class="mb-3">
+                                                                <label for="exampleNombre" class="form-label">Nombre</label>
+                                                                <input type="text" class="form-control" id="exampleNombre"
+                                                                    aria-describedby="" name="nombre" value= "<?php echo $producto -> name; ?>"> 
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="exampleSlug" class="form-label">Slug</label>
+                                                                <input type="text" class="form-control" id="exampleSlug"
+                                                                    name="slug" value= "<?php echo $producto -> slug; ?>">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="exampleDescripcion"
+                                                                    class="form-label">Descripcion</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="exampleDescripcion" aria-describedby=""
+                                                                    name="descripcion" value= "<?php echo $producto -> description; ?>">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="exampleFeatures"
+                                                                    class="form-label">Features</label>
+                                                                <input type="text" class="form-control" id="exampleFeatures"
+                                                                    name="features" value= "<?php echo $producto -> features; ?>">
+                                                            </div>
+
+                                                            <input type="hidden" value= <?php echo $producto -> id; ?> name="id">
+
+                                                            <button type="submit" class="btn btn-primary"
+                                                                name="editar">Editar</button>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Cancelar</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
