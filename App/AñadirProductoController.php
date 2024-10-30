@@ -1,4 +1,5 @@
 <?php
+    session_start();
 
 if(isset($_POST["add"])){
     if(strlen($_POST["nombre"])> 0 &&
@@ -16,12 +17,10 @@ if(isset($_POST["add"])){
         echo "No se permiten campos vacios.";
     }
 }
-    session_start();
 
     class addProductController{
         public function addProduct($nombre, $slug, $descripcion, $features){
             $curl = curl_init();
-
             curl_setopt_array($curl, array(
               CURLOPT_URL => 'https://crud.jonathansoto.mx/api/products',
               CURLOPT_RETURNTRANSFER => true,
@@ -33,7 +32,7 @@ if(isset($_POST["add"])){
               CURLOPT_CUSTOMREQUEST => 'POST',
               CURLOPT_POSTFIELDS => array('name' => $nombre,'slug' => $slug,'description' => $descripcion,'features' => $features),
               CURLOPT_HTTPHEADER => array(
-                'Authorization: Bearer 37|dVviKmAN380iyZutNmIiJkyQwYxQBA886w78keRT'
+                "Authorization: Bearer ".$_SESSION['data']->token
               ),
             ));
             

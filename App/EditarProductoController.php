@@ -40,7 +40,7 @@ class editProductController
         CURLOPT_POSTFIELDS => "name=$nombre&slug=$slug&description=$descripcion&features=$features&id=$id",
         CURLOPT_HTTPHEADER => array(
             'Content-Type: application/x-www-form-urlencoded',
-            'Authorization: Bearer 37|dVviKmAN380iyZutNmIiJkyQwYxQBA886w78keRT'
+            "Authorization: Bearer ".$_SESSION['data']->token
         ),
         ));
 

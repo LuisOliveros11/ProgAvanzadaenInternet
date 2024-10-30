@@ -154,13 +154,13 @@
 
                                         <div class="">
                                             <button type="button" class="btn btn-warning mt-3 w-50" data-bs-toggle="modal"
-                                                data-bs-target="#<?php echo $producto->slug; ?>" >
+                                                data-bs-target="#<?php echo $producto->slug; ?>">
                                                 Editar
                                             </button>
                                         </div>
-                                        <div class="modal fade" id="<?php echo $producto->slug; ?>" data-bs-backdrop="static"
-                                            data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-                                            aria-hidden="true">
+                                        <div class="modal fade" id="<?php echo $producto->slug; ?>"
+                                            data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                            aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -174,28 +174,32 @@
                                                             <div class="mb-3">
                                                                 <label for="exampleNombre" class="form-label">Nombre</label>
                                                                 <input type="text" class="form-control" id="exampleNombre"
-                                                                    aria-describedby="" name="nombre" value= "<?php echo $producto -> name; ?>"> 
+                                                                    aria-describedby="" name="nombre"
+                                                                    value="<?php echo $producto->name; ?>">
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="exampleSlug" class="form-label">Slug</label>
                                                                 <input type="text" class="form-control" id="exampleSlug"
-                                                                    name="slug" value= "<?php echo $producto -> slug; ?>">
+                                                                    name="slug" value="<?php echo $producto->slug; ?>">
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="exampleDescripcion"
                                                                     class="form-label">Descripcion</label>
                                                                 <input type="text" class="form-control"
                                                                     id="exampleDescripcion" aria-describedby=""
-                                                                    name="descripcion" value= "<?php echo $producto -> description; ?>">
+                                                                    name="descripcion"
+                                                                    value="<?php echo $producto->description; ?>">
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="exampleFeatures"
                                                                     class="form-label">Features</label>
                                                                 <input type="text" class="form-control" id="exampleFeatures"
-                                                                    name="features" value= "<?php echo $producto -> features; ?>">
+                                                                    name="features"
+                                                                    value="<?php echo $producto->features; ?>">
                                                             </div>
 
-                                                            <input type="hidden" value= <?php echo $producto -> id; ?> name="id">
+                                                            <input type="hidden" value=<?php echo $producto->id; ?>
+                                                                name="id">
 
                                                             <button type="submit" class="btn btn-primary"
                                                                 name="editar">Editar</button>
@@ -205,6 +209,36 @@
                                                         <button type="button" class="btn btn-secondary"
                                                             data-bs-dismiss="modal">Cancelar</button>
                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-danger mt-3 w-50" data-bs-toggle="modal"
+                                            data-bs-target="#eliminar<?php echo $producto->slug; ?>">
+                                            Eliminar
+                                        </button>
+                                        <div class="modal fade" id="eliminar<?php echo $producto->slug; ?>" tabindex="-1"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <form action="App/EliminarProductoController.php" method="post">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar
+                                                                Producto</h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body text-center">
+                                                            ¿Está seguro de que desea eliminar el producto?
+                                                            <input type="hidden" value=<?php echo $producto->id; ?> name="id">
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Cancelar</button>
+                                                            <button type="submit" class="btn btn-danger"
+                                                                name="eliminar">Eliminar
+                                                                Producto</button>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
