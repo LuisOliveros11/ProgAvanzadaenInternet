@@ -111,7 +111,7 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form action="App/AñadirProductoController.php" method="post">
+                                <form action="App/AñadirProductoController.php" method="post"  enctype="multipart/form-data">
                                     <div class="mb-3">
                                         <label for="exampleNombre" class="form-label">Nombre</label>
                                         <input type="text" class="form-control" id="exampleNombre" aria-describedby=""
@@ -129,6 +129,10 @@
                                     <div class="mb-3">
                                         <label for="exampleFeatures" class="form-label">Features</label>
                                         <input type="text" class="form-control" id="exampleFeatures" name="features">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <input type="file" class="form-control" id="inputGroupFile02" name="imagen">
+                                        <label class="input-group-text" for="inputGroupFile02">Subir</label>
                                     </div>
                                     <button type="submit" class="btn btn-primary" name="add">Añadir</button>
                                 </form>
@@ -229,7 +233,8 @@
                                                         </div>
                                                         <div class="modal-body text-center">
                                                             ¿Está seguro de que desea eliminar el producto?
-                                                            <input type="hidden" value=<?php echo $producto->id; ?> name="id">
+                                                            <input type="hidden" value=<?php echo $producto->id; ?>
+                                                                name="id">
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary"
