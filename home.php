@@ -11,9 +11,13 @@
 
 <body>
     <?php include "App/AuthController.php" ?>
+    <?php include "App/MarcasController.php" ?>
     <?php
     $authController = new AuthController();
     $listaProductos = $authController->obtenerProductos();
+
+    $marcasController = new Marca();
+    $listaMarcas = $marcasController->getAllBrands();
     ?>
     <div class="row g-0">
         <div class="col-2">
@@ -111,7 +115,8 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form action="App/AñadirProductoController.php" method="post"  enctype="multipart/form-data">
+                                <form action="App/AñadirProductoController.php" method="post"
+                                    enctype="multipart/form-data">
                                     <div class="mb-3">
                                         <label for="exampleNombre" class="form-label">Nombre</label>
                                         <input type="text" class="form-control" id="exampleNombre" aria-describedby=""
@@ -130,6 +135,13 @@
                                         <label for="exampleFeatures" class="form-label">Features</label>
                                         <input type="text" class="form-control" id="exampleFeatures" name="features">
                                     </div>
+                                    <select class="form-select" aria-label="Default select example" name="marca">
+                                        <option selected>Selecciona una marca</option>
+                                            <?php foreach ($listaMarcas as $marca): ?>
+                                                <option value=<?php echo $marca->id; ?>><?php echo $marca->name; ?></option>
+                                            <?php endforeach; ?>
+                                    </select>
+                                    <br>
                                     <div class="input-group mb-3">
                                         <input type="file" class="form-control" id="inputGroupFile02" name="imagen">
                                         <label class="input-group-text" for="inputGroupFile02">Subir</label>

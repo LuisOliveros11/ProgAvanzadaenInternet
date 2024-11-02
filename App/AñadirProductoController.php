@@ -6,11 +6,13 @@ if(isset($_POST["add"])){
         strlen($_POST["slug"])> 0 &&
         strlen($_POST["descripcion"])> 0 &&
         strlen($_POST["features"])> 0 &&
+        $_POST["marca"] != "Selecciona una marca" &&
         isset($_FILES["imagen"])){
             $nombre = $_POST["nombre"];
             $slug = $_POST["slug"];
             $descripcion = $_POST["descripcion"];
             $features = $_POST["features"];
+            $marca = $_POST["marca"];
 
             $imagenNombreTemp = $_FILES["imagen"]["tmp_name"];
             $imagenNombre = $_FILES["imagen"]["name"];
@@ -19,7 +21,7 @@ if(isset($_POST["add"])){
 
             if(move_uploaded_file($imagenNombreTemp,$imagenRutaLocal)){
                 $addProductController = new addProductController();
-                $addProductController -> addProduct($nombre,$slug,$descripcion,$features, $imagenRutaLocal);
+                $addProductController -> addProduct($nombre,$slug,$descripcion,$features, $marca, $imagenRutaLocal);
            }else{
                 echo "Error. Ingresa una imagen valida";            
            }
@@ -29,7 +31,7 @@ if(isset($_POST["add"])){
 }
 
     class addProductController{
-        public function addProduct($nombre, $slug, $descripcion, $features, $imagenRutaLocal){
+        public function addProduct($nombre, $slug, $descripcion, $features, $marca, $imagenRutaLocal){
             $curl = curl_init();
             curl_setopt_array($curl, array(
               CURLOPT_URL => 'https://crud.jonathansoto.mx/api/products',
@@ -40,7 +42,7 @@ if(isset($_POST["add"])){
               CURLOPT_FOLLOWLOCATION => true,
               CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
               CURLOPT_CUSTOMREQUEST => 'POST',
-              CURLOPT_POSTFIELDS => array('name' => $nombre,'slug' => $slug,'description' => $descripcion,'features' => $features,'cover'=> new CURLFILE($imagenRutaLocal)),
+              CURLOPT_POSTFIELDS => array('name' => $nombre,'slug' => $slug,'description' => $descripcion,'features' => $features,'brand_id' => $marca,'cover'=> new CURLFILE($imagenRutaLocal)),
               CURLOPT_HTTPHEADER => array(
                 "Authorization: Bearer ".$_SESSION['data']->token
               ),
