@@ -36,7 +36,7 @@ session_start();
 
             if (isset($response->data) && is_object($response->data)) {
                 $_SESSION['data'] = $response->data;
-                header("Location: ../home.php");
+                header("Location: ../home");
             } else {
                 echo "Error. Credenciales Incorrectas";
             }

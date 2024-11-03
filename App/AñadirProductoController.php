@@ -54,7 +54,7 @@ if(isset($_POST["add"])){
             curl_close($curl);
 
             if ($response -> message === "Registro creado correctamente") {
-                header("Location: ../home.php");
+                header("Location: ../home");
             } else {
                 echo "Error. Ingresa un valor correcto";
             }

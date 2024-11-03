@@ -34,7 +34,7 @@
             curl_close($curl);
 
             if ($response -> message === "Registro Eliminado correctamente") {
-                header("Location: ../home.php");
+                header("Location: ../home");
             } else {
                 echo "Error. No se pudo eliminar";
             }

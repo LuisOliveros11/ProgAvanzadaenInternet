@@ -50,7 +50,7 @@ class editProductController
         curl_close($curl);
 
         if ($response -> message === "Registro actualizado correctamente") {
-            header("Location: ../home.php");
+            header("Location: ../home");
         } else {
             echo "Error. Ingresa un valor correcto";
         }
