@@ -1,9 +1,16 @@
-Options +FollowSymLinks
+Options +FollowSymLinks -MultiViews -Indexes
 RewriteEngine on
 
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
+#páginas
+RewriteRule ^sample/?$ views/sample.php 
+RewriteRule ^home/?$ views/home.php 
 
-RewriteRule ^home$ home.php 
-RewriteRule ^auth$ AuthController.php 
-RewriteRule ^product/([0-9a-zA-z-]+)/$ detalles.php?slug=$1
+RewriteRule ^products/?$ views/products/index.php 
+RewriteRule ^products/create/?$ views/products/create.php 
+RewriteRule ^products/details/([^\/]+)/?$ views/products/details.php?slug=$1 [L]
+RewriteRule ^products/update/([^\/]+)/?$ views/products/update.php?slug=$1 [L]
+
+
+
+#RewriteCond %{REQUEST_URI} ^\/404/$
+#RewriteRule ^(.*)$ /views/errors/404.php [L]
